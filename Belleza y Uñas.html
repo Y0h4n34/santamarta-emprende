@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daniela Torres Belleza y Uñas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+            background-color: #fff9fb;
+        }
+
+        /* Animaciones */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Navegación Mejorada */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(233, 30, 99, 0.1);
+        }
+
+        nav.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            padding: 0.5rem 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+            position: relative;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: #e91e63;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            z-index: 1001;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            font-size: 1.8rem;
+        }
+
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 1.8rem;
+            color: #e91e63;
+            z-index: 1001;
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle:hover {
+            color: #ff4081;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            transition: all 0.4s ease;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            font-size: 1.1rem;
+        }
+
+        nav ul li a:hover {
+            color: #e91e63;
+            transform: translateY(-2px);
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(45deg, #e91e63, #ff4081);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Estilos para móviles */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            nav ul {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 2.5rem;
+                transform: translateY(-100%);
+                opacity: 0;
+                pointer-events: none;
+                z-index: 1000;
+                padding-top: 80px;
+            }
+            
+            nav ul.active {
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: all;
+            }
+            
+            nav ul li a {
+                font-size: 1.5rem;
+                padding: 0.5rem 1rem;
+            }
+            
+            .nav-container {
+                padding: 0 1.5rem;
+            }
+            
+            .logo {
+                font-size: 1.3rem;
+            }
+            
+            .logo i {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(233, 30, 99, 0.8), rgba(255, 64, 129, 0.8)), 
+                        url('https://images.unsplash.com/photo-1595478526108-5a414a76a52c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-content {
+            z-index: 1;
+            max-width: 800px;
+            padding: 0 2rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+            animation: float 3s ease-in-out infinite;
+            letter-spacing: 1px;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2.5rem;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+            line-height: 1.8;
+        }
+
+        .hero .subtitle {
+            font-size: 1.8rem;
+            color: #ffeb3b;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+            border-bottom: 2px solid #ffeb3b;
+            padding-bottom: 5px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #e91e63, #ff4081);
+            color: white;
+            padding: 1.2rem 2.5rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(233, 30, 99, 0.5);
+            animation: pulse 2s ease-in-out infinite;
+            border: none;
+            cursor: pointer;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(233, 30, 99, 0.7);
+        }
+
+        .cta-button::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .cta-button:hover::after {
+            transform: translateX(100%);
+        }
+
+        /* Secciones */
+        .section {
+            padding: 6rem 0;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+
+        .section h2 {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 3rem;
+            color: #333;
+            position: relative;
+            font-weight: 700;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(45deg, #e91e63, #ff4081);
+            border-radius: 2px;
+        }
+
+        .section-description {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            font-size: 1.2rem;
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* Historia */
+        .historia-section {
+            background: linear-gradient(135deg, #fff9fb, #fff0f5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .historia-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .historia-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .historia-content h3 {
+            font-size: 1.8rem;
+            color: #e91e63;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .historia-content p {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: #555;
+            margin-bottom: 1.5rem;
+        }
+
+        .historia-image {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            transition: transform 0.5s ease;
+            height: 500px;
+        }
+
+        .historia-image:hover {
+            transform: translateY(-10px);
+        }
+
+        .historia-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .historia-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .historia-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #e91e63;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(45deg, #e91e63, #ff4081);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .floating-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .shape {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 6s infinite ease-in-out;
+        }
+
+        .shape-1 {
+            width: 100px;
+            height: 100px;
+            background: #e91e63;
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            top: 10%;
+            left: 5%;
+            animation-duration: 8s;
+        }
+
+        .shape-2 {
+            width: 150px;
+            height: 150px;
+            background: #ff4081;
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            bottom: 10%;
+            right: 5%;
+            animation-duration: 10s;
+        }
+
+        .shape-3 {
+            width: 80px;
+            height: 80px;
+            background: #9c27b0;
+            border-radius: 50%;
+            top: 50%;
+            left: 30%;
+            animation-duration: 12s;
+        }
+
+        /* Servicios */
+        .servicios {
+            background: white;
+        }
+
+        .servicios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+
+        .servicio-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(233, 30, 99, 0.1);
+            z-index: 1;
+        }
+
+        .servicio-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(233, 30, 99, 0.05), rgba(255, 64, 129, 0.05));
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .servicio-card:hover::before {
+            opacity: 1;
+        }
+
+        .servicio-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .servicio-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: #e91e63;
+            transition: all 0.3s ease;
+        }
+
+        .servicio-card:hover .servicio-icon {
+            transform: scale(1.1);
+            color: #ff4081;
+        }
+
+        .servicio-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1.2rem;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .servicio-card p {
+            color: #666;
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        .servicio-price {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 0.5rem 1.2rem;
+            background: linear-gradient(45deg, #e91e63, #ff4081);
+            color: white;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(233, 30, 99, 0.3);
+        }
+
+        /* Galería */
+        .galeria {
+            background: linear-gradient(135deg, #fff9fb, #fff0f5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .galeria-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.8rem;
+            margin-top: 2rem;
+        }
+
+        .galeria-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            aspect-ratio: 1/1;
+        }
+
+        .galeria-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .galeria-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+
+        .galeria-item:hover img {
+            transform: scale(1.1);
+            filter: brightness(1.05);
+        }
+
+        .galeria-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to top, rgba(233, 30, 99, 0.8), rgba(255, 64, 129, 0.6));
+            opacity: 0;
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .galeria-item:hover .galeria-overlay {
+            opacity: 1;
+        }
+
+        .galeria-overlay h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            transform: translateY(20px);
+            transition: transform 0.4s ease;
+        }
+
+        .galeria-overlay p {
+            font-size: 1rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s ease 0.1s;
+        }
+
+        .galeria-item:hover .galeria-overlay h3,
+        .galeria-item:hover .galeria-overlay p {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .view-more {
+            display: inline-block;
+            margin-top: 3rem;
+            padding: 0.8rem 2rem;
+            background: white;
+            color: #e91e63;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid #e91e63;
+        }
+
+        .view-more:hover {
+            background: #e91e63;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(233, 30, 99, 0.3);
+        }
+
+        /* Contacto */
+        .contacto {
+            background: linear-gradient(135deg, #e91e63, #ff4081);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contacto::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="rgba(255,255,255,0.05)" d="M0,0 L100,0 L100,100 Q50,80 0,100 Z"></path></svg>');
+            background-size: cover;
+            background-position: bottom;
+            opacity: 0.1;
+        }
+
+        .contacto h2 {
+            color: white;
+            position: relative;
+        }
+
+        .contacto h2::after {
+            background: white;
+        }
+
+        .contacto-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2.5rem;
+            margin-top: 2rem;
+            position: relative;
+        }
+
+        .contacto-item {
+            padding: 2.5rem;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .contacto-item:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .contacto-item i {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .contacto-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .contacto-item p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .contacto-item a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .contacto-item a:hover {
+            color: #ffeb3b;
+            transform: translateY(-2px);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            color: white;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: white;
+            color: #e91e63;
+            transform: translateY(-5px);
+        }
+
+        /* Footer */
+        footer {
+            background: #222;
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(45deg, #e91e63, #ff4081);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            color: #aaa;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            color: #777;
+            font-size: 0.9rem;
+            margin-top: 2rem;
+        }
+
+        /* Formulario de contacto */
+        .contact-form {
+            max-width: 600px;
+            margin: 3rem auto 0;
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #e91e63;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.2);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: linear-gradient(45deg, #e91e63, #ff4081);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(233, 30, 99, 0.4);
+        }
+
+        /* Botón flotante de WhatsApp */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
+            z-index: 100;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.6);
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .historia-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .historia-image {
+                order: -1;
+                height: 400px;
+            }
+            
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .hero p {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 0 1.5rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero .subtitle {
+                font-size: 1.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section {
+                padding: 4rem 1rem;
+            }
+            
+            .section h2 {
+                font-size: 2.2rem;
+            }
+            
+            .historia-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .servicio-card {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .cta-button {
+                padding: 1rem 2rem;
+                font-size: 1rem;
+            }
+            
+            .section h2 {
+                font-size: 1.8rem;
+            }
+            
+            .contacto-item {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Efectos de scroll */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.6s ease;
+        }
+
+        .slide-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.6s ease;
+        }
+
+        .slide-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Estilos para el botón de Facebook */
+        .facebook-icon {
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .facebook-icon i {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background-color: #3b5998;
+            color: rgb(247, 240, 240);
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navegación Mejorada -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo"><i class="fas fa-spa"></i> Daniela Torres</a>
+            
+            <div class="menu-toggle" id="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+            
+            <ul id="nav-menu">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#historia">Historia</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#galeria">Galería</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <span class="subtitle">Belleza & Uñas</span>
+            <h1>Daniela Torres</h1>
+            <p>Transformando tu belleza con pasión, profesionalismo y un toque de magia</p>
+            <a href="#contacto" class="cta-button">Reserva tu cita ahora</a>
+        </div>
+    </section>
+
+    <!-- Historia -->
+    <section id="historia" class="section historia-section">
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+        <h2 class="fade-in">Nuestra Historia</h2>
+        <p class="section-description fade-in">Una trayectoria de pasión, dedicación y amor por la belleza</p>
+        
+        <div class="historia-container">
+            <div class="historia-content fade-in">
+                <h3 style="text-align: center;">De un sueño a una realidad</h3>
+                <p style="text-align: justify;">Daniela Torres es una joven de la comunidad Santa Marta que desde muy pequeña guarda una pasión por todo lo relacionado con la belleza. Actualmente es la fundadora de "Belleza y Uñas Daniela Torres", un emprendimiento que busca resaltar la belleza femenina en todas sus expresiones.</p>
+                <p style="text-align: justify;">La joven Daniela Torres ha pasado diferentes cursos de preparación para poder brindar lo mejor de sus servicios a cada una de sus clientas. Daniela se encuentra en una formación continua, pues ella considera que siempre hay nuevas tendencias por aprender y está dispuesta a continuar con su preparación para poder ofrecer un buen servicio a todas las personas que solicitan sus trabajos.</p>
+                <p><strong>Belleza y Uñas Daniela Torres, un espacio ideal para consentirte y destacar tu belleza.</strong></p>
+                
+                <div class="historia-stats">
+                    <div class="stat-item slide-in-left">
+                        <div class="stat-number">PA</div>
+                        <div class="stat-label">En </div>
+                    </div>
+                    <div class="stat-item fade-in">
+                        <div class="stat-number">SI</div>
+                        <div class="stat-label">Cada</div>
+                    </div>
+                    <div class="stat-item slide-in-right">
+                        <div class="stat-number">ÓN</div>
+                        <div class="stat-label">Trabajo</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="historia-image fade-in">
+                <img src="img/Dany.0.jpg" alt="Daniela Torres trabajando">
+            </div>
+        </div>
+    </section>
+
+    <!-- Servicios -->
+    <section id="servicios" class="section servicios">
+        <h2 class="fade-in">Nuestros Servicios</h2>
+        <p class="section-description fade-in">Ofrecemos tratamientos de alta calidad con productos premium y técnicas innovadoras</p>
+        
+        <div class="servicios-grid">
+            <div class="servicio-card slide-in-left">
+                <div class="servicio-icon"><i class="fas fa-fingerprint"></i></div>
+                <h3>Uñas acrílicas</h3>
+                <div class="servicio-price">$</div>
+            </div>
+            
+            <div class="servicio-card fade-in">
+                <div class="servicio-icon"><i class="fas fa-hand-holding-water"></i></div>
+                <h3>Baño de acrílico</h3>
+                <div class="servicio-price">$</div>
+            </div>
+            
+            <div class="servicio-card slide-in-right">
+                <div class="servicio-icon"><i class="fas fa-paint-brush"></i></div>
+                <h3>Esmaltados semipermanentes</h3>
+                <div class="servicio-price">$</div>
+            </div>
+            
+            <div class="servicio-card slide-in-left">
+                <div class="servicio-icon"><i class="fas fa-wind"></i></div>
+                <h3>Alisados</h3>
+                <div class="servicio-price">$</div>
+            </div>
+            
+            <div class="servicio-card fade-in">
+                <div class="servicio-icon"><i class="fas fa-fire"></i></div>
+                <h3>Planchados</h3>
+                <div class="servicio-price">$</div>
+            </div>
+
+            <div class="servicio-card fade-in">
+                <div class="servicio-icon"><i class="fas fa-eye"></i></div>
+                <h3>Maquillajes</h3>
+                <div class="servicio-price">$</div>
+            </div>
+
+            <div class="servicio-card fade-in">
+                <div class="servicio-icon"><i class="fas fa-cut"></i></div>
+                <h3>Peinados</h3>
+                <div class="servicio-price">$</div>
+            </div>
+            
+            <div class="servicio-card slide-in-right">
+                <div class="servicio-icon"><i class="fas fa-water"></i></div>
+                <h3>Ondas</h3>
+                <div class="servicio-price">$</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galería -->
+    <section id="galeria" class="section galeria">
+        <h2 class="fade-in">Nuestros Trabajos</h2>
+        <p class="section-description fade-in">Una muestra de nuestra creatividad y atención al detalle</p>
+        
+        <div class="galeria-grid">
+            <div class="galeria-item fade-in">
+                <img src="img/Dany.1.jpg" alt="Manicura elegante">
+                <div class="galeria-overlay">
+                    <h3><strong>Uñas Acrílicas almendradas</strong></h3>
+                    <p>Efecto aurora</p>
+                </div>
+            </div>
+            
+            <div class="galeria-item fade-in">
+                <img src="img/Dany 2.jpg" alt="Diseño de uñas artístico">
+                <div class="galeria-overlay">
+                    <h3><strong>Uñas Acrílicas almendradas</strong></h3>
+                    <p>Efecto aurora</p>
+                </div>
+            </div>
+            
+            <div class="galeria-item fade-in">
+                <img src="img/Dany 3.jpg" alt="Uñas acrílicas">
+                <div class="galeria-overlay">
+                    <h3><strong>Uñas Acrílicas</strong></h3>
+                    <p>Esmaltado semipermanente</p>
+                </div>
+            </div>
+            
+            <div class="galeria-item fade-in">
+                <img src="img/Dany 4.jpg" alt="Pedicura spa">
+                <div class="galeria-overlay">
+                    <h3><strong>Esmaltado semipermanente</strong></h3>
+                    <p>Con french dorado</p>
+                </div>
+            </div>
+            
+            <div class="galeria-item fade-in">
+                <img src="img/Dany 5.jpg" alt="Uñas de gel">
+                <div class="galeria-overlay">
+                    <h3><strong>Alisado Orgánico</strong></h3>
+                    <p>100% libre de formol, ideal para niñas mayores de 10 años y para mujeres embarazadas, un liso perfecto hasta por 6 meses.</p>
+                </div>
+            </div>
+
+            <div class="galeria-item fade-in">
+                <img src="img/Dany 8.jpg" alt="Uñas de gel">
+                <div class="galeria-overlay">
+                    <h3><strong>Acrílicas naturales</strong></h3>
+                    <p>Diseño de corazón a mano alzada.</p>
+                </div>
+            </div>
+
+            <div class="galeria-item fade-in">
+                <img src="img/Dany 7.jpg" alt="Uñas de gel">
+                <div class="galeria-overlay">
+                    <h3><strong>Acripie Rojito</strong></h3>
+                </div>
+            </div>
+
+            <div class="galeria-item fade-in">
+                <img src="img/Dany 9.jpg" alt="Uñas de gel">
+                <div class="galeria-overlay">
+                    <h3><strong>Alisado Orgánico</strong></h3>
+                </div>
+            </div>
+            
+            <div class="galeria-item fade-in">
+                <img src="img/Dany 6.jpg" alt="Diseño especial">
+                <div class="galeria-overlay">
+                    <h3><strong>Acrílicas almendradas</strong></h3>
+                    <p>Con french y diseño a mano alzada.</p>
+                </div>
+            </div>
+
+             <div class="galeria-item fade-in">
+                <img src="img/Dany 10.jpg" alt="Uñas de gel">
+                <div class="galeria-overlay">
+                    <h3><strong>Acrílicas con relieve</strong></h3>
+                    <p>Con french y efecto espejo dorado.</p>
+                </div>
+            </div>
+
+             <div class="galeria-item fade-in">
+                <img src="img/Dany 12.jpg" alt="Uñas de gel">
+                <div class="galeria-overlay">
+                    <h3><strong>Maquillaje social</strong></h3>
+                    <p>Ideal para resaltar la belleza de las mujeres.</p>
+                </div>
+            </div>
+
+            <div class="galeria-item fade-in">
+                <img src="img/Dany 13.jpg" alt="Uñas de gel">
+                <div class="galeria-overlay">
+                    <h3><strong>Acrílicas</strong></h3>
+                    <p>Esmaltado semipermanente color vino y glitter encapsulado.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contacto" class="section contacto">
+        <h2 class="fade-in">Contáctanos</h2>
+        <p class="section-description fade-in">Estamos aquí para responder todas tus preguntas y reservar tu próxima cita</p>
+        
+        <div class="contacto-info">
+            <div class="contacto-item fade-in">
+                <i class="fas fa-phone-alt"></i>
+                <h3>Teléfono</h3>
+                <p><a href="tel:+503 7858 3842"></a><strong>+503 7858 3842</strong></p>
+            </div>
+            
+            <div class="contacto-item fade-in">
+                <i class="fas fa-envelope"></i>
+                <h3>Facebook</h3>
+                <p><a href="https://www.facebook.com/share/16tkfjTfxF/?mibextid=wwXIfr">Belleza y uñas Daniela</a></p>
+            </div>
+            
+            <div class="contacto-item fade-in">
+                <i class="fas fa-map-marker-alt"></i>
+                <h3>Ubicación</h3>
+                <p><strong>Colonia 5 de noviembre, Comunidad Santa Marta, Cabañas, El Salvdor</strong></p>
+            </div>
+            
+            <div class="contacto-item fade-in">
+                <i class="fas fa-clock"></i>
+                <h3>Horarios</h3>
+                <p>Lun-Vie: 9AM - 7PM<br>Sáb: 9AM - 4PM</p>
+            </div>
+        </div>
+        
+        <div class="social-links fade-in">
+            <p>
+                <a href="https://www.facebook.com/BellezayunasDaniela" target="_blank" class="facebook-icon"> 
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <a href="#" class="footer-logo">Daniela Torres</a>
+            
+            <p class="copyright">&copy; 2025 Daniela Torres Belleza y Uñas. <br><strong>Apoyemos lo Nuestro</strong>.</p>
+        </div>
+    </footer>
+    
+    <!-- Botón de WhatsApp -->
+    <a href="https://wa.me/50372345678" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // Menú móvil mejorado
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navMenu = document.getElementById('nav-menu');
+        
+        mobileMenu.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            mobileMenu.innerHTML = navMenu.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Cerrar menú al hacer clic en un enlace (solo en móviles)
+        document.querySelectorAll('#nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    navMenu.classList.remove('active');
+                    mobileMenu.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+            });
+        });
+
+        // Efectos de scroll
+        function handleScroll() {
+            const elements = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right');
+            const windowHeight = window.innerHeight;
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        // Navegación suave
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        function handleNavbarScroll() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        }
+
+        // Event listeners
+        window.addEventListener('scroll', handleScroll);
+        window.addEventListener('scroll', handleNavbarScroll);
+        window.addEventListener('load', handleScroll);
+
+        // Parallax effect for hero
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+    </script>
+</body>
+</html>

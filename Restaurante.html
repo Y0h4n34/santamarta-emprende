@@ -1,0 +1,1813 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salomé Restaurante & Café</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gold: #d4af37;
+            --gold-light: #f4d03f;
+            --dark: #141414;
+            --light: #f8f8f8;
+            --transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+            background-color: var(--light);
+        }
+
+        /* Header y Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(20, 20, 20, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--gold);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1001;
+        }
+
+        .logo i {
+            animation: spin 8s linear infinite;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+
+        /* Menú Hamburguesa */
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .menu-toggle i {
+            color: white;
+            font-size: 1.8rem;
+            transition: var(--transition);
+        }
+
+        .menu-toggle:hover i {
+            color: var(--gold);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+            position: relative;
+            font-weight: 500;
+            padding: 5px 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('img/Salomé 1.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(0,0,0,0.7), rgba(0,0,0,0.3));
+            z-index: 1;
+        }
+
+        .hero-content {
+            animation: fadeInUp 1s ease, float 6s ease-in-out infinite;
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: var(--gold);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            animation: textGlow 3s ease-in-out infinite alternate;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(45deg, var(--gold), var(--gold-light));
+            color: #333;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: 0.5s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.6);
+        }
+
+        /* Sections */
+        section {
+            padding: 100px 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--gold);
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about {
+            background: linear-gradient(135deg, #f8f8f8 0%, #ffffff 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: var(--gold);
+            opacity: 0.1;
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .about::after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: -100px;
+            width: 300px;
+            height: 300px;
+            background: var(--gold);
+            opacity: 0.05;
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .about-text p::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 10px;
+            height: 10px;
+            background: var(--gold);
+            border-radius: 50%;
+        }
+
+        .about-image {
+            width: 100%;
+            height: 400px;
+            background: url('img/Salomé.jpg');
+            background-size: cover;
+            background-position: center;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            transition: var(--transition);
+        }
+
+        .about-image:hover {
+            transform: scale(1.02) rotate(1deg);
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(212, 175, 55, 0.1), rgba(244, 208, 63, 0.1));
+        }
+
+        /* Menu Section */
+        .menu {
+            background: linear-gradient(135deg, #ffffff 0%, #f9f9f9 100%);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .menu-category {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .menu-category::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 0;
+            background: var(--gold);
+            transition: height 0.5s ease;
+        }
+
+        .menu-category:hover::before {
+            height: 100%;
+        }
+
+        .menu-category:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .menu-category h3 {
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            text-align: center;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .menu-category h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 2px;
+            background: var(--gold-light);
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px dashed #ddd;
+            transition: var(--transition);
+            align-items: center;
+        }
+
+        .menu-item:hover {
+            transform: translateX(10px);
+            border-bottom-color: var(--gold-light);
+        }
+
+        .menu-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .item-name {
+            font-weight: bold;
+            flex: 1;
+            transition: var(--transition);
+        }
+
+        .item-price {
+            color: var(--gold);
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            background: rgba(212, 175, 55, 0.1);
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .menu-item:hover .item-name {
+            color: var(--gold);
+        }
+
+        .menu-item:hover .item-price {
+            transform: scale(1.1);
+            background: rgba(212, 175, 55, 0.2);
+        }
+
+        /* Gallery Section */
+        .gallery {
+            background: linear-gradient(135deg, #f8f8f8 0%, #ffffff 100%);
+            padding-bottom: 50px;
+        }
+
+        .gallery-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--gold);
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .gallery-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+            border-radius: 2px;
+        }
+
+        .dish-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            padding: 20px;
+        }
+
+        .dish-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .dish-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .dish-image {
+            height: 200px;
+            width: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: var(--transition);
+        }
+
+        .dish-card:hover .dish-image {
+            transform: scale(1.1);
+        }
+
+        .dish-info {
+            padding: 20px;
+            position: relative;
+            background: white;
+            z-index: 1;
+        }
+
+        .dish-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .dish-description {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .dish-price {
+            color: var(--gold);
+            font-weight: bold;
+            font-size: 1.2rem;
+            display: inline-block;
+            background: rgba(212, 175, 55, 0.1);
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
+
+        .dish-tag {
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            background: var(--gold);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Services Section */
+        .services {
+            background: linear-gradient(135deg, #ffffff 0%, #f9f9f9 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .services::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background: var(--gold);
+            opacity: 0.05;
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: var(--transition);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light));
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .service-card:hover::before {
+            height: 10px;
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, var(--gold), var(--gold-light));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2rem;
+            color: white;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .service-card:hover .service-icon {
+            transform: rotate(15deg) scale(1.1);
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.5);
+        }
+
+        .service-card h3 {
+            margin-bottom: 1rem;
+            color: var(--dark);
+            position: relative;
+            display: inline-block;
+        }
+
+        .service-card h3::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 2px;
+            background: var(--gold-light);
+            transition: var(--transition);
+        }
+
+        .service-card:hover h3::after {
+            width: 50px;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, #f8f8f8 0%, #ffffff 100%);
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: var(--transition);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .contact-form:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .contact-form h3 {
+            margin-bottom: 1.5rem;
+            color: var(--gold);
+            text-align: center;
+            font-size: 1.8rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #555;
+            font-weight: bold;
+            transition: var(--transition);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #eee;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+            font-family: 'Georgia', serif;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+        }
+
+        .form-group input:focus + label,
+        .form-group textarea:focus + label {
+            color: var(--gold);
+        }
+
+        .form-group i {
+            position: absolute;
+            right: 15px;
+            top: 40px;
+            color: #aaa;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus ~ i,
+        .form-group textarea:focus ~ i {
+            color: var(--gold);
+        }
+
+        .contact-info {
+            background: linear-gradient(135deg, #333 0%, #222 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: var(--transition);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .contact-info:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .contact-info h3 {
+            margin-bottom: 1.5rem;
+            color: var(--gold);
+            text-align: center;
+            font-size: 1.8rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .contact-item:hover {
+            transform: translateX(10px);
+            background: rgba(255,255,255,0.1);
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .contact-item:hover .contact-icon {
+            transform: rotate(15deg) scale(1.1);
+            background: var(--gold-light);
+        }
+
+        .contact-item h4 {
+            margin-bottom: 5px;
+            color: var(--gold-light);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #222 0%, #333 100%);
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            display: inline-block;
+            transition: var(--transition);
+        }
+
+        .footer-logo:hover {
+            transform: scale(1.1);
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+        }
+
+        .footer-text {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            color: #aaa;
+        }
+
+        .social-links {
+            margin: 2rem 0;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background: var(--gold);
+            color: white;
+            text-decoration: none;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: 0.5s;
+        }
+
+        .social-links a:hover::before {
+            left: 100%;
+        }
+
+        .social-links a:hover {
+            transform: scale(1.1) rotate(10deg);
+            background: var(--gold-light);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.5);
+        }
+
+        .footer-bottom {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--gold);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            text-decoration: none;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 999;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: var(--gold-light);
+            transform: translateY(-5px);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes textGlow {
+            from {
+                text-shadow: 0 0 5px rgba(212, 175, 55, 0.5);
+            }
+            to {
+                text-shadow: 0 0 15px rgba(212, 175, 55, 0.8), 0 0 20px rgba(212, 175, 55, 0.6);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                transform: translateX(-100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        /* Scroll animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .animate-left {
+            opacity: 0;
+            transform: translateX(-100px);
+            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .animate-left.animated {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .animate-right {
+            opacity: 0;
+            transform: translateX(100px);
+            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .animate-right.animated {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Loading Animation */
+        .loader-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(212, 175, 55, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--gold);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .about-image {
+                height: 300px;
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background: rgba(20, 20, 20, 0.98);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 2rem;
+                transition: var(--transition);
+                z-index: 1000;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .menu-grid,
+            .services-grid,
+            .dish-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loader-wrapper">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Header con menú hamburguesa -->
+    <header>
+        <nav>
+            <a href="index.html" class="logo"><i class="fas fa-utensils"></i>Salomé</a>
+            
+            <!-- Botón del menú hamburguesa -->
+            <div class="menu-toggle" id="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+            
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#nosotros">Nosotros</a></li>
+                <li><a href="#menu">Menú</a></li>
+                <li><a href="#galeria">Galería</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <h1>Salomé Restaurante & Café</h1>
+            <p>Descubre una experiencia gastronómica única donde cada plato cuenta una historia y cada taza de café despierta tus sentidos</p>
+            <a href="#menu" class="cta-button">Ver Nuestro Menú</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="nosotros" class="about">
+        <div class="section-title animate-on-scroll">Nuestra Historia</div>
+        <div class="about-content">
+            <div class="about-text animate-on-scroll">
+                <p style="text-align: justify;"> La idea de crear Salomé Restaurante & Café surge cuando Nancy estaba apunto de salir de la universidad, al ver la problemática de desempleo que vivía mi familia decidí buscar una solución ante esta situación que estaban enfrentando, Salomé Restaurante & Café es un negocio creado en familia y con el fin de servir a las familias de la comunidad Santa Marta y de todas las comunidades, municipios, departamentos y países que deseen visitar sus instalaciones. </p>
+                <p style="text-align: justify;"> Soy Nancy Carolina Ayala Ascencio es una joven soñadora, luchadora y capaz de hacer  realidad sus sueños. Desde muy pequeña tuvo la idea de tener su propio negocio, de hecho la carrera universitaria que eligió estudiar la eligió pensando en esta posibilidad, al igual que siempre mostró un amor por la cocina y todo lo que de esta se deriva, Nancy desde muy joven se caracteriza por ser la encargada de la cocina durante las reuniones o festejos familiares. </p>
+                <p style="text-align: justify;"> Como parte de la historia de este emprendimiento, es muy importante mencionar que el nombre "Salomé" fue pensado como una idea de aprovechar el nombre del abuelo de la familia y a su vez de rendirle un homenaje a una persona que ha sido un pilar fundamental dentro de la misma, "Salomé" aparte de ser un nombre poco común en la comunidad es un nombre muy bonito y llamativo, elegirlo ha sido una gran idea, pues no solamente hemos elegido un nombre único, sino que con esta elección también hemos decidido hacer un agradecimiento y homenaje por todo el trabajo que ha realizado nuestro abuelo Salomé dentro de la familia.</p>
+                <p style="text-align: justify;"> Aunque este negocio ha sido posible gracias a todo el apoyo familiar, Nancy a tenido un papel muy importante en esta idea y se puede decir que soy la diseñadora de la misma, pero el apoyo que ha brindado todo la familia también ha sido de gran importancia para convertir en realidad algo que en un momento solo era una idea.</p>
+                <p style="text-align: justify;"> Soy Licenciada en Administración de Empresas, carrera que me ha permitido profundizar aún más en su conocimientos, también he adquirido mayores conocimientos en la parte de la cocina, pues es me carecterizo por ser la encargada de la preparación de los diferentes tipos de platillos que en Salomé Restaurante & Café se ofrecen.</p>
+                <p style="text-align: justify;"> Salomé Restaurante & Café es un lugar en donde las personas pueden disfrutar de un espacio agradable que les permita recrearse, dedicarse un tiempo para sí mismos y compartir momentos únicos en familia mientras disfrutan de un rico platillo y bebida preparada por el amable personal que labora en el local.</p>
+                <p style="text-align: justify;"> El equipo que trabaja en el Restaurante está conformado por Elsi y Albertina encargadas de servir, hacer bebidas y dedicarse a la cocina cuando es necesario, Yo soy la encargada del funcionamiento del local, todo lo que tiene que tiene que ver con surtir el mismo y controlar la parte administrativa y redes sociales, también realizo actividades en la cocina. Adonis es el encargado de realizar los servicios de entrega a domicilio a nuestros clientes.</p>
+            </div>
+            <div class="about-image animate-on-scroll">
+                <!-- Imagen de fondo agregada en CSS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="menu">
+        <div class="section-title animate-on-scroll">Nuestro Menú</div>
+        <div class="menu-grid">
+            <div class="menu-category animate-on-scroll">
+                <h3>🌮 Entradas 🌮</h3>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Nachos con Carne</div>
+                        <small>Tortilas de maíz, acompañadas de frijolitos refritos, carne picada, salsa de aguacate, chirmol y queso gratinado.</small>
+                    </div>
+                    <span class="item-price">$4.99</span>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Nachos con Queso</div>
+                        <small>Tortillas de maíz, bañadas en salsa de queso, acompañadas de frijolitos refritos, salsa de aguacate y chirmol.</small>
+                    </div>
+                    <span class="item-price">$4.00</span>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Tortilita Jalapeña</div>
+                        <small>Tortillita de maíz frita, acompañada de queso gratinado y jalapeños.</small>
+                    </div>
+                    <span class="item-price">$2.00</span>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Papas Francesas</div>
+                        <small>Orden de papas acompañdas de kétchup.</small>
+                    </div>
+                    <span class="item-price">$1.75</span>
+                </div>
+              <div class="menu-item">
+                    <div>
+                        <div class="item-name">Salchi-Papa</div>
+                        <small>Papas francesas acompañadas de salchichas y baño de queso cheddar.</small>
+                    </div>
+                    <span class="item-price">$2.50</span>
+                </div>
+            </div>
+
+            <div class="menu-category animate-on-scroll">
+                <h3>🍕 Pizzas 🍕</h3>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Pizza de Jamón</div>
+                        <small>Salsa de tomate, queso y jamón.</small>
+                    </div>
+                    <span class="item-price">$3.50</span>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Pizza de Pepperoni</div>
+                        <small>Salsa de tomate, queso y pepperoni.</small>
+                    </div>
+                    <span class="item-price">$3.50</span>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Pizza de Hongos</div>
+                        <small>Salsa de tomate, queso y hongos.</small>
+                    </div>
+                    <span class="item-price">$3.50</span>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Pizza Hawaiana</div>
+                        <small>Salsa de tomate, queso, jamón y piña.</small>
+                    </div>
+                    <span class="item-price">$3.50</span>
+                </div>
+            </div>  
+            
+            <div class="menu-category animate-on-scroll">
+                <h3>🍽️ Platos fuertes 🍽️</h3>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Carne a la Parrilla</div>
+                        <small>6 oz de carne de res, papa rellena de queso, vegetales, arroz, chirmol y tortilla.</small>
+                    </div>
+                    <span class="item-price">$6.99</span>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Churrasco Argentino</div>
+                        <small>6 oz de carne de res, chorizo argentino, casamiento, vegetales, chirmol, aguacate, queso y tortilla.</small>
+                    </div>
+                    <span class="item-price">$7.25</span>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Pechuga a la Plancha</div>
+                        <small>6 oz de pechuga de pollo, papa rellena de queso, ensalada fresca, arroz y tortilla.</small>
+                    </div>
+                    <span class="item-price">$6.99</span>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Costilla de Cerdo en Salsa BBQ</div>
+                        <small>8 oz de costilla, acompañada de casamiento, vegetales, papa horneada y tortilla frita.</small>
+                    </div>
+                    <span class="item-price">$7.99</span>
+                </div>
+            </div>
+
+            <div class="menu-category animate-on-scroll">
+                <h3>🍔 Comida Rápida 🌮</h3>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Pechuguitas Empanizadas</div>
+                        <small>5 oz de pechuga de pollo cortada en trocitos, acompañada de papas.</small>
+                    </div>
+                    <span class="item-price">$3.50</span>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Hamburguesa de Res</div>
+                        <small>Pan, carne, hongos, lechuga, tomate, pepino, cebolla, queso cheddar y hongos, acompañada de papas.</small>
+                    </div>
+                    <span class="item-price">$4.99</span>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Burrito</div>
+                        <small>Tortilla de harina, carne de res o pollo, frijoles molidos, queso cheddar, aguacate, chirmol, acompañado de papas.</small>
+                    </div>
+                    <span class="item-price">$4.25</span>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Tacos al Carbón</div>
+                        <small>3 tacos de carne de res, pollo o mixtos en tortilla de maíz, acompañados de chirmol.</small>
+                    </div>
+                    <span class="item-price">$4.00</span>
+               </div> 
+            </div> 
+            
+            <div class="menu-category animate-on-scroll">
+                <h3>🍹 Bebidas 🍸</h3>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Refresco Natural</div>
+                        <small></small>
+                    </div>
+                    <span class="item-price">$1.50</span>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Frozen de Frutas</div>
+                        <small></small>
+                    </div>
+                    <span class="item-price">$2.00</span>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Limonada con HierbaBuena</div>
+                        <small></small>
+                    </div>
+                    <span class="item-price">$2.00</span>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Limonada Rosa</div>
+                        <small></small>
+                    </div>
+                    <span class="item-price">$2.00</span>
+            </div>                  
+            <div class="menu-item">
+                <div>
+                    <div class="item-name">Limonada Natural</div>
+                    <small></small>
+                    </div>
+                    <span class="item-price">$1.50</span>
+            </div>               
+            <div class="menu-item">
+                <div>
+                    <div class="item-name">Mojito Cubano</div>
+                    <small></small>
+                    </div>
+                    <span class="item-price">$3.25</span>
+            </div>
+             <div class="menu-item">
+                <div>
+                    <div class="item-name">Mojito con Fresa</div>
+                    <small></small>
+                    </div>
+                    <span class="item-price">$3.25</span>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="item-name">Michelada</div>
+                    <small></small>
+                    </div>
+                    <span class="item-price">$3.50</span>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="item-name">Licuados</div>
+                    <small></small>
+                    </div>
+                    <span class="item-price">$1.50</span>
+            </div>
+        </div>
+                        
+            <div class="menu-category animate-on-scroll">
+                <h3>👌 Especiales 🍽️</h3>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Tacos de Camarón</div>
+                        <small>Tres tacos de tortilla de maíz, chirmol, col morada, camarones empanizados con baño d salsa chipotle y aguacate.</small>
+                    </div>
+                    <span class="item-price">$5.00</span>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Ensalada de la Casa</div>
+                        <small>Lechuga, tomate, pepino zanahoria rallada, aceitunas, crutones, pechuga a la plancha y salsa ranch.</small>
+                    </div>
+                    <span class="item-price">$4.99</span>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Mar y Tierra</div>
+                        <small>4 camarones, 6 onz de pechuga, 6 onz de carnea la parrilla acompañado de arroz, vegetales, tortilla frita y papa horneada.</small>
+                    </div>
+                    <span class="item-price">$13.99</span>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Pasta en Salsa Alfredo</div>
+                        <small>Pasta tipo linguine, salsa blanca de hongos con proteína a su elección (pechuga a la plancha o camarones)</small>
+                    </div>
+                    <span class="item-price">$4.99</span>
+            </div>                  
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="galeria" class="gallery">
+        <div class="gallery-title animate-on-scroll">Nuestros Platillos</div>
+        <div class="dish-grid">
+            <!-- Plato 1 -->
+            <div class="dish-card animate-on-scroll">
+                <div class="dish-image" style="background-image: url('img/Nancy 1.jpeg');"></div>
+                <div class="dish-info">
+                    <div class="dish-tag">Salomé Restaurante & Café</div>
+                    <h3 class="dish-name"><strong>Churrasco Argentino</strong></h3>
+                    <span class="dish-price">$7.25</span>
+                </div>
+            </div>
+            
+            <!-- Plato 2 -->
+            <div class="dish-card animate-on-scroll">
+                <div class="dish-image" style="background-image: url('img/Nancy 2.jpeg');"></div>
+                <div class="dish-info">
+                    <div class="dish-tag">Salomé Restaurante & Café</div>
+                    <h3 class="dish-name"><strong>Pechuga a la Plancha</strong></h3>
+                    <span class="dish-price">$6.99</span>
+                </div>
+            </div>
+            
+            <!-- Plato 3 -->
+            <div class="dish-card animate-on-scroll">
+                <div class="dish-image" style="background-image: url('img/Nancy 14.jpg');"></div>
+                <div class="dish-info">
+                    <div class="dish-tag">Salomé Restaurante & Café</div>
+                    <h3 class="dish-name"><strong>Pechuga en salsa de hongos</strong></h3>
+                    <span class="dish-price">$7.50</span>
+                </div>
+            </div>
+            
+            <!-- Plato 4 -->
+            <div class="dish-card animate-on-scroll">
+                <div class="dish-image" style="background-image: url('img/Nancy 16.jpg');"></div>
+                <div class="dish-info">
+                    <div class="dish-tag">Salomé Restaurante & Café</div>
+                    <h3 class="dish-name"><strong>Nachos con carne</strong></h3>
+                    <span class="dish-price">$4.99</span>
+                </div>
+            </div>
+            
+            <!-- Plato 5 -->
+            <div class="dish-card animate-on-scroll">
+                <div class="dish-image" style="background-image: url('img/Nancy 5.jpeg');"></div>
+                <div class="dish-info">
+                    <div class="dish-tag">Salomé Restaurante & Café</div>
+                    <h3 class="dish-name"><strong>Tacos de la casa</strong></h3>
+                    <span class="dish-price">$3.75</span>
+                </div>
+            </div>
+            
+            <!-- Plato 6 -->
+            <div class="dish-card animate-on-scroll">
+                <div class="dish-image" style="background-image: url('img/Nancy 6.jpeg');"></div>
+                <div class="dish-info">
+                    <div class="dish-tag">Salomé Restaurante & Café</div>
+                    <h3 class="dish-name"><strong>Fraphe Mokka</strong></h3>
+                    <span class="dish-price">$2.99</span>
+                </div>
+            </div>
+
+            <!-- Plato 7 -->
+            <div class="dish-card animate-on-scroll">
+                <div class="dish-image" style="background-image: url('img/Nancy 7.jpeg');"></div>
+                <div class="dish-info">
+                    <div class="dish-tag">Salomé Restaurante & Café</div>
+                    <h3 class="dish-name"><strong>Hamburguesa</strong></h3>
+                    <span class="dish-price">$4.99</span>
+                </div>
+            </div>
+
+            <!-- Plato 8 -->
+            <div class="dish-card animate-on-scroll">
+                <div class="dish-image" style="background-image: url('img/Nancy 8.jpeg');"></div>
+                <div class="dish-info">
+                    <div class="dish-tag">Salomé Restaurante & Café</div>
+                    <h3 class="dish-name"><strong>Tacos de camarón</strong></h3>
+                    <span class="dish-price">$5</span>
+                </div>
+            </div>
+
+            <!-- Plato 9-->
+            <div class="dish-card animate-on-scroll">
+                <div class="dish-image" style="background-image: url('img/Nancy 9.jpeg');"></div>
+                <div class="dish-info">
+                    <div class="dish-tag">Salomé Restaurante & Café</div>
+                    <h3 class="dish-name"><strong>Pechuguitas Empanizadas</strong></h3>
+                    <span class="dish-price">$3.50</span>
+                </div>
+            </div>
+
+            <!-- Plato 10-->
+            <div class="dish-card animate-on-scroll">
+                <div class="dish-image" style="background-image: url('img/Nancy 15.jpg');"></div>
+                <div class="dish-info">
+                    <div class="dish-tag">Salomé Restaurante & Café</div>
+                    <h3 class="dish-name"><strong>Ensalada de la casa</strong></h3>
+                    <span class="dish-price">$$4.99</span>
+                </div>
+            </div>
+
+            <!-- Plato 11-->
+            <div class="dish-card animate-on-scroll">
+                <div class="dish-image" style="background-image: url('img/Nancy 11.jpeg');"></div>
+                <div class="dish-info">
+                    <div class="dish-tag">Salomé Restaurante & Café</div>
+                    <h3 class="dish-name"><strong>Tacos de la casa</strong></h3>
+                    <span class="dish-price">$3.75</span>
+                </div>
+            </div>
+
+                 <!-- Plato 12-->
+            <div class="dish-card animate-on-scroll">
+                <div class="dish-image" style="background-image: url('img/Nancy 12.jpeg');"></div>
+                <div class="dish-info">
+                    <div class="dish-tag">Salomé Restaurante & Café</div>
+                    <h3 class="dish-name"><strong>Brownie</strong></h3>
+                    <span class="dish-price">$2.50</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="servicios" class="services">
+        <div class="section-title animate-on-scroll">¿Qué ofrecemos?</div>
+        <div class="services-grid">
+            <div class="service-card animate-on-scroll">
+                <div class="service-icon">🍽️</div>
+                <h3><strong>Deliciosos platillos</strong></h3>
+                <p></p>
+            </div>
+            <div class="service-card animate-on-scroll">
+                <div class="service-icon">🍴 </div>
+                <h3><strong>Servicios de banquetes </strong></h3>
+                <p></p>
+            </div>
+            <div class="service-card animate-on-scroll">
+                <div class="service-icon">🚚</div>
+                <h3><strong>Entregas a domicilio</strong></h3>
+                <p></p>
+            </div>
+            <div class="service-card animate-on-scroll">
+                <div class="service-icon">🏠</div>
+                <h3><strong>Local disponible para sus eventos</strong></h3>
+                <p></p>
+            </div>
+            <div class="service-card animate-on-scroll">
+                <div class="service-icon">📍</div>
+                <h3>Ambiente cálido y acogedor </h3>
+                <p></p>
+            </div>
+            <div class="service-card animate-on-scroll">
+                <div class="service-icon">🏍️</div>
+                <h3>Banquetes a domicilio</h3>
+                <p></p>
+            </div>
+            <div class="service-card animate-on-scroll">
+                <div class="service-icon">📖</div>
+                <h3>Comida a la carta </h3>
+                <p></p>
+            </div>
+             <div class="service-card animate-on-scroll">
+                <div class="service-icon">🎤</div>
+                <h3>Zona ideal para karaoke</h3>
+                <p></p>
+            </div>
+            <div class="service-card animate-on-scroll">
+                <div class="service-icon">🏘️</div>
+                <h3>Área techada</h3>
+                <p></p>
+            </div>
+            <div class="service-card animate-on-scroll">
+                <div class="service-icon">🚗</div>
+                <h3>Amplio espacio para parqueo</h3>
+                <p></p>
+            </div>
+            <div class="service-card animate-on-scroll">
+                <div class="service-icon">🍃</div>
+                <h3> Espacio al aire libre</h3>
+                <p></p>
+            </div>
+            <div class="service-card animate-on-scroll">
+                <div class="service-icon">👨‍👩‍👧‍👦</div>
+                <h3>Lugar para disfrutar con familia y amistades</h3>
+                <p></p>
+            </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contacto" class="contact">
+        <div class="section-title animate-on-scroll">Contáctanos</div>
+        <div class="contact-content">
+            <div class="contact-info animate-right">
+                <h3>Información de Contacto</h3>
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <div>
+                        <h4>Dirección</h4>
+                        <p>Comunidad Valle Nuevo, Cantón Santa Marta, Ciudad Victoria, Cabañas, El Salvador</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📞</div>
+                    <div>
+                        <h4>Teléfono</h4>
+                        <p>+503 7654-0450</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="#1877F2" viewBox="0 0 24 24" width="24" height="24">
+  <path d="M22 12a10 10 0 1 0-11.5 9.87v-7H8v-3h2.5V9.5A3.5 3.5 0 0 1 14 6h2v3h-1.5a1.5 1.5 0 0 0-1.5 1.5V12H16l-.5 3h-2v7A10 10 0 0 0 22 12Z"/>
+</svg>
+</div>
+                    <div>
+                        <h4>Facebook</h4>
+                        <p>Salomé Restaurante & Café</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="#E1306C" viewBox="0 0 24 24" width="24" height="24">
+  <path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5A4.25 4.25 0 0 0 20.5 16.25v-8.5A4.25 4.25 0 0 0 16.25 3.5h-8.5Zm4.25 4.25a5.25 5.25 0 1 1 0 10.5 5.25 5.25 0 0 1 0-10.5Zm0 1.5a3.75 3.75 0 1 0 0 7.5 3.75 3.75 0 0 0 0-7.5ZM17 7.25a1 1 0 1 1 2 0 1 1 0 0 1-2 0Z"/>
+</svg>
+</div>
+                    <div>
+                        <h4>Instagram</h4>
+                        <p>@restaurante_salome</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">🕒</div>
+                    <div>
+                        <h4>Horarios</h4>
+                        <p>Lun - Dom: 6:00 AM - 10:00 PM</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <a href="#" class="footer-logo"><i class="fas fa-utensils"></i> Salomé</a>
+            <p class="footer-text">Descubre el auténtico sabor Santamarteño en cada bocado. Ven y vive una experiencia gastronómica inolvidable.</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Salomé Restaurante & Café.<br><strong>Apoyemos lo Nuestro</strong></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
+
+    <script>
+        // Loading screen
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.querySelector('.loader-wrapper').style.opacity = '0';
+                setTimeout(function() {
+                    document.querySelector('.loader-wrapper').style.display = 'none';
+                }, 500);
+            }, 1000);
+        });
+
+        // Menú hamburguesa
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.getElementById('nav-links');
+
+        mobileMenu.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+            
+            // Cambiar el icono entre hamburguesa y X
+            const icon = this.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Cerrar el menú al hacer clic en un enlace
+        document.querySelectorAll('#nav-links a').forEach(link => {
+            link.addEventListener('click', function() {
+                navLinks.classList.remove('active');
+                mobileMenu.querySelector('i').classList.remove('fa-times');
+                mobileMenu.querySelector('i').classList.add('fa-bars');
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Animation on scroll
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.animate-on-scroll, .animate-left, .animate-right');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('animated');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', animateOnScroll);
+        animateOnScroll(); // Run on page load
+
+        // Header background change on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(20, 20, 20, 0.98)';
+                header.style.padding = '0.5rem 0';
+            } else {
+                header.style.background = 'rgba(20, 20, 20, 0.95)';
+                header.style.padding = '1rem 0';
+            }
+        });
+
+        // Form submission
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto.');
+            this.reset();
+        });
+
+        // Back to top button
+        const backToTopButton = document.querySelector('.back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('active');
+            } else {
+                backToTopButton.classList.remove('active');
+            }
+        });
+
+        // Add pulse animation to logo
+        const logo = document.querySelector('.logo');
+        setInterval(() => {
+            logo.style.animation = 'pulse 2s ease-in-out';
+            setTimeout(() => {
+                logo.style.animation = '';
+            }, 2000);
+        }, 8000);
+
+        // Add parallax effect to hero section
+        window.addEventListener('scroll', () => {
+            const scrollPosition = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            hero.style.backgroundPositionY = scrollPosition * 0.5 + 'px';
+        });
+
+        // Add hover effect to menu items
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.querySelector('.item-name').style.color = '#d4af37';
+                this.querySelector('.item-price').style.transform = 'scale(1.2)';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.querySelector('.item-name').style.color = '';
+                this.querySelector('.item-price').style.transform = '';
+            });
+        });
+
+        // Add floating animation to service icons
+        document.querySelectorAll('.service-icon').forEach((icon, index) => {
+            icon.style.animation = `float 3s ease-in-out infinite`;
+            icon.style.animationDelay = `${index * 0.3}s`;
+        });
+
+        // Add hover effect to contact items
+        document.querySelectorAll('.contact-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.querySelector('.contact-icon').style.transform = 'rotate(15deg) scale(1.1)';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.querySelector('.contact-icon').style.transform = '';
+            });
+        });
+
+        // Add animation to dish cards
+        document.querySelectorAll('.dish-card').forEach((card, index) => {
+            card.style.transitionDelay = `${index * 0.1}s`;
+        });
+    </script>
+</body>
+</html>

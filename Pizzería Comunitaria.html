@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Santa Marta Pizza - Sabores Auténticos de la Comunidad</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Header & Navigation */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(139, 69, 19, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* Menú Hamburguesa */
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            z-index: 1001;
+            font-size: 1.8rem;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle:hover {
+            color: #ff6b35;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #ff6b35;
+            transform: translateY(-2px);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #ff6b35;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, #8b4513 0%, #ff6b35 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="3" fill="rgba(255,255,255,0.05)"/><circle cx="40" cy="80" r="1" fill="rgba(255,255,255,0.1)"/></svg>');
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .hero-content {
+            z-index: 2;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: #ff6b35;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.6);
+            background: #e55a2b;
+        }
+
+        /* Sections General */
+        .section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            color: #8b4513;
+            position: relative;
+            animation: slideInFromLeft 1s ease-out;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #8b4513, #ff6b35);
+            border-radius: 2px;
+        }
+
+        /* Historia Section */
+        .historia {
+            background: linear-gradient(135deg, #f8f4e6 0%, #fff 100%);
+        }
+
+        .historia-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .historia-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            animation: fadeInLeft 1s ease-out;
+        }
+
+        .historia-image {
+            text-align: center;
+            animation: fadeInRight 1s ease-out;
+        }
+
+        .pizza-icon {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(45deg, #ff6b35, #8b4513);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            margin: 0 auto;
+            animation: rotate 10s linear infinite;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        /* Carrusel de Pizzas */
+        .pizzas-carrusel {
+            background: #fff;
+            padding: 5rem 2rem;
+        }
+
+        .carrusel-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .carrusel-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            color: #8b4513;
+            position: relative;
+        }
+
+        .carrusel-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #8b4513, #ff6b35);
+            border-radius: 2px;
+        }
+
+        .carrusel {
+            display: flex;
+            gap: 2rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding: 2rem 0;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .carrusel::-webkit-scrollbar {
+            display: none;
+        }
+
+        .pizza-card {
+            flex: 0 0 300px;
+            scroll-snap-align: start;
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .pizza-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .pizza-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .pizza-info {
+            padding: 1.5rem;
+        }
+
+        .pizza-name {
+            font-size: 1.5rem;
+            color: #8b4513;
+            margin-bottom: 0.5rem;
+        }
+
+        .pizza-desc {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .pizza-price {
+            font-weight: bold;
+            color: #ff6b35;
+            font-size: 1.2rem;
+        }
+
+        .carrusel-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .carrusel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ddd;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .carrusel-dot.active {
+            background: #ff6b35;
+            transform: scale(1.2);
+        }
+
+        /* Menú Section */
+        .menu {
+            background: #fff;
+        }
+
+        .menu-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .menu-category {
+            background: linear-gradient(135deg, #fff 0%, #f8f4e6 100%);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .menu-category:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+
+        .category-title {
+            font-size: 2rem;
+            color: #8b4513;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #eee;
+            transition: all 0.3s ease;
+        }
+
+        .menu-item:hover {
+            background: rgba(255, 107, 53, 0.05);
+            padding-left: 1rem;
+            border-radius: 8px;
+        }
+
+        .item-name {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .item-description {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 0.3rem;
+        }
+
+        .item-price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #ff6b35;
+        }
+
+        /* Contacto Section */
+        .contacto {
+            background: linear-gradient(135deg, #eb872b 0%, #e9b982 100%);
+            color: white;
+        }
+
+        .contacto-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contacto-info {
+            animation: fadeInLeft 1s ease-out;
+        }
+
+        .contacto-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .contacto-item:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateX(10px);
+        }
+
+        .contacto-icon {
+            font-size: 2rem;
+            margin-right: 1rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .mapa {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            animation: fadeInRight 1s ease-out;
+        }
+
+        /* Footer */
+        .footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInFromLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            }
+            to {
+                text-shadow: 3px 3px 20px rgba(255,107,53,0.5);
+            }
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background: rgba(139, 69, 19, 0.98);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 2rem;
+                transition: all 0.5s ease;
+                z-index: 1000;
+                padding: 2rem;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .historia-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .contacto-content {
+                grid-template-columns: 1fr;
+            }
+
+            .menu-categories {
+                grid-template-columns: 1fr;
+            }
+
+            .pizza-icon {
+                width: 200px;
+                height: 200px;
+                font-size: 5rem;
+            }
+
+            .pizza-card {
+                flex: 0 0 250px;
+            }
+        }
+
+        /* Scroll Animation Trigger */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .logo {
+            text-decoration: none;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <a href="index.html" class="logo">🍕 Santa Marta Pizza</a>
+            
+            <!-- Botón del menú hamburguesa -->
+            <div class="menu-toggle" id="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+            
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#historia">Nuestra Historia</a></li>
+                <li><a href="#pizzas">Nuestras Pizzas</a></li>
+                <li><a href="#menu">Menú</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <h1>Santa Marta Pizza</h1>
+            <p>Sabores auténticos que unen a la comunidad</p>
+            <a href="#menu" class="cta-button">Descubre Nuestro Menú</a>
+        </div>
+    </section>
+
+    <!-- Historia Section -->
+    <section id="historia" class="historia section">
+        <h2 class="section-title animate-on-scroll">Nuestra Historia</h2>
+        <div class="historia-content">
+            <div class="historia-text animate-on-scroll">
+                <p style="text-align: justify;"><strong>Soy Marlon Ayala, un joven originario de la comunidad Santa Marta, actualmente el fundador y propietario de Santa Marta Pizza, un negocio que tiene sus orígenes luego de mi regreso al país después de haber estado un cierto período de tiempo en Estados Unidos. </strong></p>
+                
+                <p style="text-align: justify;"><strong>En el extranjero estuve trabajando en una pizzería y fue allí donde adquirí muchos conocimientos en cuanto a la elaboración de pizzas, cuando regrese al país, me encontraba muy motivado y sabía que contaba con las habilidades necesarias para montar un negocio relacionado a la elaboración de pizzas en nuestra comunidad, teniendo en cuenta que esto vendría a ser de gran beneficio para la población y para mí, porque aparte de crear un espacio de consumo accesible para los habitantes de Santa Marta y sus alrededores, también sería un local que me ayudaría en la generación de ingresos económicos.</strong></p>
+                
+                <p style="text-align: justify;"><strong>En Santa Marta Pizza, no solo servimos pizzas con ingredientes frescos y sabores inolvidables: construimos oportunidades. <br> Somos un emprendimiento, donde cada porción lleva el esfuerzo de jóvenes talentosos de nuestra comunidad, que encuentran aquí un espacio para crecer, aprender y aportar a su hogar.</strong></p>
+            </div>
+            <div class="historia-image animate-on-scroll">
+                <div class="pizza-icon">🍕</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Carrusel de Pizzas -->
+    <section id="pizzas" class="pizzas-carrusel">
+        <div class="carrusel-container">
+            <h2 class="carrusel-title animate-on-scroll">Nuestras Pizzas</h2>
+            <div class="carrusel animate-on-scroll">
+                <!-- Pizza 1 -->
+                <div class="pizza-card">
+                    <img src="img/Marlon 1.jpeg" alt="Pizza" class="pizza-img">
+                    <div class="pizza-info">
+                        <h3 class="pizza-name">Vegetariana</h3>
+                        <p class="pizza-desc"><strong>Deliciosa pizza con salsa de tomate, queso mozzarella, hongos, tomate, cebolla y brocoli.</strong></p>
+                        <div class="pizza-price">Somos Santa Marta Pizza</div>
+                    </div>
+                </div>
+                
+                <!-- Pizza 2 -->
+                <div class="pizza-card">
+                    <img src="img/Marlon 2.jpeg" alt="Pizza" class="pizza-img">
+                    <div class="pizza-info">
+                        <h3 class="pizza-name">Jamón Pizza</h3>
+                        <p class="pizza-desc"><strong>Combinación perfecta de jamón, queso mozzarella ysalsa de tomate.</strong></p>
+                        <div class="pizza-price">Es un placer atederles</div>
+                    </div>
+                </div>
+                
+                <!-- Pizza 3 -->
+                <div class="pizza-card">
+                    <img src="img/Marlon 3.jpeg" alt="Pizza" class="pizza-img">
+                    <div class="pizza-info">
+                        <h3 class="pizza-name">Pepperoni Pizza</h3>
+                        <p class="pizza-desc"><strong>Pizza con peperoni, salsa de tomate y queso mozzarella.</strong></p>
+                        <div class="pizza-price">Amamos lo que hacemos</div>
+                    </div>
+                </div>
+                
+                <!-- Pizza 4 -->
+                <div class="pizza-card">
+                    <img src="img/Marlon 4.jpeg" alt="Pizza" class="pizza-img">
+                    <div class="pizza-info">
+                        <h3 class="pizza-name">Pizza Cuatro Sabores</h3>
+                        <p class="pizza-desc"><strong>En Santa Marta Pizza tenemos la pizza ideal para voz que sos amante de las combinaciones de sabores.</strong></p>
+                        <div class="pizza-price">Cada pizza es el resultado de nuestra dedicación y pasión por lo que hacemos</div>
+                    </div>
+                </div>
+                
+                <!-- Pizza 5 -->
+                <div class="pizza-card">
+                    <img src="img/Marlon 5.jpeg" alt="Pizza" class="pizza-img">
+                    <div class="pizza-info">
+                        <h3 class="pizza-name">Pizza mixta</h3>
+                        <p class="pizza-desc"><strong>Pepperoni, hongos, queso mozzarella y salsa de tomate es una combinación perfecta para disfruatar en familia y amigos.</strong></p>
+                        <div class="pizza-price">Ofrecemos un amable servicio</div>
+                    </div>
+                </div>
+                <!-- Pizza 6 -->
+                <div class="pizza-card">
+                    <img src="img/Marlon 6.jpeg" alt="Pizza" class="pizza-img">
+                    <div class="pizza-info">
+                        <h3 class="pizza-name">Suprema pizza-jalapeños</h3>
+                        <p class="pizza-desc"><strong>Para los amantes del picante. <br>Jamón, queso mozzarella, salsa de tomate y porciones de chile jalapeño.</strong></p>
+                        <div class="pizza-price">Icluimos una variedad de sabores en nuestro menú</div>
+                    </div>
+                </div>
+
+                 <!-- Pizza 7 -->
+                <div class="pizza-card">
+                    <img src="img/Marlon 7.jpg" alt="Pizza" class="pizza-img">
+                    <div class="pizza-info">
+                        <h3 class="pizza-name">Hamburguesa con papas</h3>
+                        <p class="pizza-desc"><strong>Una excelente combinación de sabores para tu paladar.</strong></p>
+                        <div class="pizza-price">En Pizza Santa Marta esperamos por ti.</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="carrusel-nav">
+                <div class="carrusel-dot active" data-index="0"></div>
+                <div class="carrusel-dot" data-index="1"></div>
+                <div class="carrusel-dot" data-index="2"></div>
+                <div class="carrusel-dot" data-index="3"></div>
+                <div class="carrusel-dot" data-index="4"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menú Section -->
+    <section id="menu" class="menu section">
+        <h2 class="section-title animate-on-scroll">Nuestro Menú</h2>
+        <div class="menu-categories">
+            <!-- Pizzas Personales -->
+            <div class="menu-category animate-on-scroll">
+                <h3 class="category-title">🍕 Pizzas Personales 🍕 </h3>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Cheese Pizza</div>
+                    </div>
+                    <div class="item-price">$3</div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Jamon Pizza</div>
+                    </div>
+                    <div class="item-price">$3</div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Pepperoni Pizza</div>
+                    </div>
+                    <div class="item-price">$3.50</div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Pizza Suprema</div>
+                    </div>
+                    <div class="item-price">$3.50</div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Carne Pizza</div>
+                    </div>
+                    <div class="item-price">$3.50</div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Pizza Vegetariana</div>
+                    </div>
+                    <div class="item-price">$3.50</div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Pollo Pizza</div>
+                    </div>
+                    <div class="item-price">$3.50</div>
+                </div>
+            </div>
+
+            <!-- Pizzas Familiares -->
+            <div class="menu-category animate-on-scroll">
+                <h3 class="category-title">👨‍👩‍👧‍👦🍕 Pizzas Familiares 👨‍👩‍👧‍👦🍕</h3>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Cheese Pizza</div>
+                    </div>
+                    <div class="item-price">$6.50</div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Jamon Pizza</div>
+                    </div>
+                    <div class="item-price">$7.00</div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Pepperoni Pizza</div>
+                    </div>
+                    <div class="item-price">$8.00</div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Hawaillana Pizza</div>
+                    </div>
+                    <div class="item-price">$9.00</div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Carne Pizza</div>
+                    </div>
+                    <div class="item-price">$9.00</div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Pollo Pizza</div>
+                    </div>
+                    <div class="item-price">$9.00</div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Vegetariana Pizza</div>
+                    </div>
+                    <div class="item-price">$10.00</div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Suprema Pizza</div>
+                    </div>
+                    <div class="item-price">$10.00</div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <div class="item-name">Pollo y Carne Pizza</div>
+                    </div>
+                    <div class="item-price">$12.00</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Otros -->
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-6 col-lg-4">
+                <div class="menu-category animate-on-scroll text-center">
+                    <h3 class="category-title"> 🍔 Otros 🍞 </h3>
+                    <div class="menu-item">
+                        <div>
+                            <div class="item-name">Hambuerguesa Normal</div>
+                        </div>
+                        <div class="item-price">$1.75</div>
+                    </div>
+                    <div class="menu-item">
+                        <div>
+                            <div class="item-name">Hambuerguesa con papas</div>
+                        </div>
+                        <div class="item-price">$3.50</div>
+                    </div>
+                    <div class="menu-item">
+                        <div>
+                            <div class="item-name">Pan con ajo</div>
+                        </div>
+                        <div class="item-price">$1.00</div>
+                    </div>
+                    <div class="menu-item">
+                        <div>
+                            <div class="item-name">Pan con ajo especial</div>
+                        </div>
+                        <div class="item-price">$1.50</div>
+                    </div>
+                    <div class="menu-item">
+                        <div>
+                            <div class="item-name">Súper torta</div>
+                        </div>
+                        <div class="item-price">$3.00</div>
+                    </div>
+                    <div class="menu-item">
+                        <div>
+                            <div class="item-name">Variedad de bebidas frías</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto Section -->
+    <section id="contacto" class="contacto section">
+        <h2 class="section-title animate-on-scroll">Contáctanos</h2>
+        <div class="contacto-content">
+            <div class="contacto-info">
+                <div class="contacto-item animate-on-scroll">
+                    <div class="contacto-icon">📍</div>
+                    <div>
+                        <h3>Dirección</h3>
+                        <p>Colonia El Campo, Comunidad Santa Marta, Cabañas, El Salvador.</p>
+                    </div>
+                </div>
+                <div class="contacto-item animate-on-scroll">
+                    <div class="contacto-icon">📞</div>
+                    <div>
+                        <h3>Haz tus pedidos</h3>
+                        <p>WhatsApp: (503) 7283-4195</p>
+                    </div>
+                </div>
+                <div class="contacto-item animate-on-scroll">
+                    <div class="contacto-icon">🕒</div>
+                    <div>
+                        <h3>Horarios</h3>
+                        <p>Lunes a Domingo<br>2:00 PM - 8:00 PM</p>
+                    </div>
+                </div>
+
+                <div class="contacto-item animate-on-scroll">
+                    <div class="contacto-icon">🏍️</div>
+                    <div>
+                        <h3>Servicios a domicilio disponibles</h3>
+                    </div>
+                </div>
+                <div class="contacto-item animate-on-scroll">
+                    <div class="contacto-icon">📧</div>
+                    <div>
+                        <h3>Facebook</h3>
+                        <p><a href="https://www.facebook.com/share/19UDjp2Smk/?mibextid=wwXIfr">Santa Marta Pizza</a></p>
+                    </div>
+                </div>
+            <div class="mapa animate-on-scroll">
+                <h3><strong>📍🍕¿Cómo llegar?🍕📍</strong></h3>
+                <p>Si estás de visita en nuestra comunidad no dudes en llegar a Santa Marta Pizza para disfrutar de nuestras deliciosas pizzas.<br>Estamos ubicados en la colonia el campo, frente al <strong> Parquesito Legado del Migrante y la Canchita de Voleibol</strong><br>¡Visítanos será un placer atenderte!</p>
+                <br>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 Santa Marta Pizza</p>
+        <p><strong>Apoyemos lo Nuestro</strong></p>
+    </footer>
+
+    <script>
+        // Menú hamburguesa
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.getElementById('nav-links');
+
+        mobileMenu.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+            
+            // Cambiar el icono entre hamburguesa y X
+            const icon = this.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Cerrar el menú al hacer clic en un enlace
+        document.querySelectorAll('#nav-links a').forEach(link => {
+            link.addEventListener('click', function() {
+                navLinks.classList.remove('active');
+                mobileMenu.querySelector('i').classList.remove('fa-times');
+                mobileMenu.querySelector('i').classList.add('fa-bars');
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Header background change on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(139, 69, 19, 0.98)';
+            } else {
+                header.style.background = 'rgba(139, 69, 19, 0.95)';
+            }
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all elements with animate-on-scroll class
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Add some interactive effects
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.02)';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            const rate = scrolled * -0.5;
+            
+            if (hero) {
+                hero.style.transform = `translateY(${rate}px)`;
+            }
+        });
+
+        // Add floating animation to pizza icon
+        const pizzaIcon = document.querySelector('.pizza-icon');
+        if (pizzaIcon) {
+            setInterval(() => {
+                pizzaIcon.style.transform += ' translateY(-5px)';
+                setTimeout(() => {
+                    pizzaIcon.style.transform = pizzaIcon.style.transform.replace(' translateY(-5px)', '');
+                }, 1000);
+            }, 3000);
+        }
+
+        // Carrusel functionality
+        const carrusel = document.querySelector('.carrusel');
+        const dots = document.querySelectorAll('.carrusel-dot');
+        let currentIndex = 0;
+
+        // Update carrusel position and active dot
+        function updateCarrusel(index) {
+            currentIndex = index;
+            const cardWidth = document.querySelector('.pizza-card').offsetWidth + 32; // width + gap
+            carrusel.scrollTo({
+                left: index * cardWidth,
+                behavior: 'smooth'
+            });
+            
+            // Update active dot
+            dots.forEach((dot, i) => {
+                if (i === index) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+
+        // Dot click event
+        dots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                const index = parseInt(dot.getAttribute('data-index'));
+                updateCarrusel(index);
+            });
+        });
+
+        // Auto-rotate carrusel
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % dots.length;
+            updateCarrusel(currentIndex);
+        }, 5000);
+
+        // Touch/swipe support for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        carrusel.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, false);
+
+        carrusel.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, false);
+
+        function handleSwipe() {
+            const threshold = 50; // minimum swipe distance
+            
+            if (touchEndX < touchStartX - threshold) {
+                // Swipe left - next
+                currentIndex = Math.min(currentIndex + 1, dots.length - 1);
+                updateCarrusel(currentIndex);
+            } else if (touchEndX > touchStartX + threshold) {
+                // Swipe right - previous
+                currentIndex = Math.max(currentIndex - 1, 0);
+                updateCarrusel(currentIndex);
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Liceo Gym - Transforma tu Vida</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    /* Navbar */
+    .navbar {
+      background: rgba(0, 0, 0, 0.95) !important;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      padding: 1rem 0;
+    }
+
+    .navbar-brand {
+      font-weight: 700;
+      font-size: 1.8rem;
+      background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .navbar-nav .nav-link {
+      color: white !important;
+      font-weight: 500;
+      margin: 0 0.5rem;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .navbar-nav .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 50%;
+      background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+    }
+
+    .navbar-nav .nav-link:hover::after {
+      width: 80%;
+    }
+
+    /* Hero Section */
+    .hero {
+      height: 100vh;
+      background: url('img/Liceo Gym.jpg') center center / cover no-repeat;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: black;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #1abc9c;
+      opacity: 0.3;
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      margin-bottom: 2rem;
+      animation: fadeInUp 1s ease-out 0.3s both;
+    }
+
+    .cta-button {
+      background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+      border: none;
+      padding: 1rem 2.5rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: white;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+      animation: fadeInUp 1s ease-out 0.6s both;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(255, 107, 107, 0.4);
+      color: white;
+    }
+
+    /* Section Styling */
+    .section {
+      padding: 100px 0;
+      position: relative;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 3rem;
+      position: relative;
+      color: #333;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+      border-radius: 2px;
+    }
+
+    /* Historia Section */
+    .historia {
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    }
+
+    .historia-content {
+      background: white;
+      padding: 3rem;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      margin: 2rem 0;
+      transition: all 0.3s ease;
+    }
+
+    .historia-content:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Horarios Section */
+    .horarios-section {
+      background: linear-gradient(135deg, #0f0f23, #1a1a3e, #2d1b69);
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .schedule-card {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 25px;
+      padding: 2.5rem;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.5s ease;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+    }
+
+    .schedule-item {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 15px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      border-left: 4px solid #00ffff;
+      transition: all 0.3s ease;
+    }
+
+    .day-label {
+      font-weight: 700;
+      color: #00ffff;
+      margin-right: 15px;
+      min-width: 120px;
+      display: inline-block;
+    }
+
+    /* Precios Section */
+    .pricing-card {
+      background: white;
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .price {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #ff6b6b;
+      margin: 1rem 0;
+    }
+
+    /* Galería Section */
+    .gallery-section {
+      background: linear-gradient(135deg, #3a3a3f, #331a3f);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 15px;
+      margin-bottom: 2rem;
+      cursor: pointer;
+      transition: all 0.5s ease;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .gallery-img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      transition: all 0.5s ease;
+    }
+
+    .gallery-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, rgba(255, 107, 107, 0.8), rgba(78, 205, 196, 0.8));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+
+    /* Testimonios Section */
+    .testimonials-section {
+      background: linear-gradient(135deg, #000000 0%, #1a1a2e 50%, #16213e 100%);
+      position: relative;
+      overflow: hidden;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+    }
+
+    .testimonial-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+      height: auto;
+      min-height: 350px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .testimonial-text {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.9);
+      margin-top: 1.5rem;
+      font-style: italic;
+      flex-grow: 1;
+    }
+
+    .author-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      margin-right: 1rem;
+    }
+
+    /* Contacto Section */
+    .contact-section {
+      background: linear-gradient(135deg, #ffffff 0%, #dceefd 100%);
+    }
+
+    .contact-card {
+      background: white;
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Footer */
+    footer {
+      background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+      color: white;
+      padding: 3rem 0;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .social-link {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      color: white;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 992px) {
+      .section-title {
+        font-size: 2.5rem;
+      }
+      
+      .historia-content {
+        padding: 2rem;
+      }
+      
+      .testimonial-card {
+        min-height: 300px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      .hero p {
+        font-size: 1.1rem;
+      }
+      
+      .section {
+        padding: 80px 0;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+      }
+      
+      .pricing-card, .testimonial-card {
+        margin-bottom: 1.5rem;
+      }
+      
+      .gallery-img {
+        height: 200px;
+      }
+      
+      .testimonial-card {
+        min-height: auto;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+      
+      .section-title {
+        font-size: 1.8rem;
+      }
+      
+      .historia-content {
+        padding: 1.5rem;
+      }
+      
+      .schedule-card {
+        padding: 1.5rem;
+      }
+      
+      .day-label {
+        min-width: 100px;
+        display: block;
+        margin-bottom: 0.5rem;
+      }
+      
+      .testimonial-text {
+        font-size: 0.9rem;
+      }
+      
+      .author-avatar {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+      }
+    }
+
+    /* Scroll animations */
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+
+    .animate-on-scroll.animated {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark">
+  <div class="container">
+    <a class="navbar-brand" href="index.html"><i class="fas fa-dumbbell"></i> Liceo Gym</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </div>
+</nav>
+
+  <!-- Hero Section -->
+  <section id="inicio" class="hero d-flex align-items-center text-white text-center">
+    <div class="hero-content container">
+      <h1 class="display-4 fw-bold animate-on-scroll">Transforma tu Vida y Cuerpo en Liceo Gym</h1>
+    </div>
+  </section>
+
+  <!-- Historia Section -->
+  <section id="historia" class="section historia">
+    <div class="container">
+      <h2 class="section-title animate-on-scroll">Nuestra Historia</h2>
+      <div class="historia-content animate-on-scroll">
+        <div class="row align-items-center">
+          <div class="col-lg-6">
+            <h3 class="mb-4">Liceo Gym Santa Marta</h3>
+            <p style="text-align: justify;">Soy José Armando Laínez Rivas un joven originario de la comunidad Santa Marta, soy el creador de Liceo Gym, un negocio que ha venido a ser de gran beneficio para mí y para un alto porcentaje de la población de la comunidad, incluyendo a personas adultas, jóvenes y niños, pués la idea de un gimnasio dentro de la comunidad se ha convertido en algo muy innovador y ha sio bien recivido por la población.</p>
+            <p style="text-align: justify;">Es posible decir que los orígenes de esta idea comienzan en 2020, un año en donde la pandemia del Coronavirus puso un alto a todas las actividades laborales y recreativas que normalmente eran realizadas por las personas.
+Decido aprovechar mi tiempo libre durante ese año para comenzar a realizar ejercicio en casa, luego, un joven de la comunidad habré un gimnasio y decido ir a realizar mis rutinas de ejercicio allí, estuve llegando durante un año y medio aproximadamente y dejé de asistir porque el gimnasio fue cerrado, ante esta situación veo la posibilidad de pedir alquilado o prestado el equipo que se tenía en el gym para poder continuar desarrollando mis rutinas de ejercicio en casa. Sin embargo, pongo pausa por un cierto período de tiempo a mi hábito de realizar actividad física por motivos de trabajo y por el poco tiempo y energía con la que contaba al estar desarrollando el mismo.</p>
+            <p style="text-align: justify;">A pesar de esto, sigo manteniendo la idea de crear un espacio que me permitiera realizar mis rutinas de ejercicio, pero durante este proceso, decido renunciar a mi trabajo; ante la situación de desempleo que estaba pasando, la idea de crear un espacio que me fuera funcional solamente a mí, se convierte en un motor de arranque para poner a volar mi imaginación e identificar la manera de autoemplearme y poder monetizar el proyecto que en un primer momento fue pensado para mi beneficio en términos de "salud física y emocional" pero que hoy en día se ha vuelto un espacio muy agradable y beneficioso para las personas, pues aparte de que se cuenta con un espacio en la comunidad que permite la práctica de la actividad física, Liceo Gym se ha convertido en un lugar de encuentro para las personas.  
+Con la creación de este proyecto, he facilitado el acceso a un espacio de este tipo a las personas de la comunidad, pues antes de que Liceo Gym comenzará a funcionar las personas tenían que trasladarse hasta Sensuntepeque para poder asistir a un gimnasio.
+</p>
+          </div>
+          <div class="col-lg-6">
+            <div class="position-relative">
+              <img src="img/Gym.0.jpg" class="img-fluid rounded-3 shadow-lg" alt="Historia del gimnasio">
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="historia-content animate-on-scroll">
+        <div class="row align-items-center">
+          <div class="col-lg-6 order-lg-2">
+            <h3 class="mb-4">Un Espacio para Todos</h3>
+            <p style="text-align: justify;">En la actualidad las personas están priorizando su salud y con ello la práctica de actividad física, reconozco que hace unos 5 años las personas que realizaban ejercicio físico o que salían a correr por las calles eran sinónimo de burla, sin embargo en la actualidad las personas han normalizado la actividad física y es muy probable que esto venga a consecuencia de muchas enfermedades que en la actualidad personas desde muy temprana edad están padeciendo. Ante todo esto considero lo siguiente:</p>
+            <p style="text-align: justify;"><em>"Es necesario que los seres humanos aprendamos a realizar cosas importantes por nosotros mismos, pues muchas veces realizamos grandes cosas por los demás pero nos olvidamos de hacerlas para nosotros"</em> - José Armando Laínez</p>
+            <p style="text-align: justify;">Muchas de las personas que asisten a Liceo Gym lo hacen por ver cambios en su apariencia física, pero otro porcentaje lo hace porque se los ha recomendado un médico y lo mejor de todo es que en ambos casos las personas se están priorizando a sí mismas y este es un gran paso hacia una buena  salud emocional, física y bienestar personal, lo cual es fundamental para llevar una vida más satisfactoria y equilibrada.</p>
+          </div>
+          <div class="col-lg-6 order-lg-1">
+            <div class="position-relative">
+              <img src="img/Gym.1.jpg" class="img-fluid rounded-3 shadow-lg" alt="Comunidad del gimnasio">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Horarios Section -->
+  <section id="horarios" class="section horarios-section">
+    <div class="container">
+      <div class="text-center mb-4">
+        <i class="fas fa-dumbbell gym-icon fs-1 text-primary"></i>
+      </div>
+      <h2 class="section-title text-center animate-on-scroll mb-5 text-white">Horarios de Atención</h2>
+      
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="schedule-card animate-on-scroll">
+            <p class="text-center mb-4 fs-5 text-white">
+              En <strong>Liceo Gym</strong> nos adaptamos a tu ritmo de vida.
+            </p>
+            <p class="text-center mb-4 fs-5 text-white">
+              <strong>Nuestros Horarios de Atención:</strong>
+            </p>
+            
+            <div class="schedule-list">
+              <div class="schedule-item">
+                <span class="day-label">Lunes a Viernes:</span>
+                <span class="text-white">6:00 a.m – 12:00 p.m y 2:00 p.m – 8:00 p.m</span>
+              </div>
+              <div class="schedule-item">
+                <span class="day-label">Sábado:</span>
+                <span class="text-white">7:00 a.m – 6:00 p.m</span>
+              </div>
+              <div class="schedule-item">
+                <span class="day-label">Domingo:</span>
+                <span class="text-white">Cerrado</span>
+              </div>
+            </div>
+            
+            <p class="text-center mt-4 mb-0 text-white">
+              Te esperamos para que empieces o continúes tu transformación con nosotros
+            </p>
+            <p class="text-center mt-2 fs-5 text-white">
+              <strong>¡El primer paso hacia el cambio lo das Tú!</strong>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Precios Section -->
+  <section id="precios" class="section" style="background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);">
+    <div class="container">
+      <h2 class="section-title animate-on-scroll">Planes y Tarifas</h2>
+      <div class="text-center mb-5 animate-on-scroll">
+        <p class="fs-5">
+          En <strong>Liceo Gym</strong> te ofrecemos precios accesibles para que puedas alcanzar tus metas sin complicaciones.
+          Ya sea por día o por mes, ¡tú decides cómo entrenar!
+        </p>
+      </div>
+      <div class="row g-4 justify-content-center">
+        <!-- Plan Mensual -->
+        <div class="col-lg-5 col-md-6">
+          <div class="pricing-card animate-on-scroll text-center p-4 rounded-4 h-100 shadow" style="background: white;">
+            <h4 class="fw-bold mb-3">Plan Mensual</h4>
+            <div class="price fs-1 text-primary mb-3">$17<small class="fs-6 text-muted">/mes</small></div>
+            <ul class="list-unstyled fs-5 mb-4">
+              <li><i class="fas fa-check text-success me-2"></i>Acceso a sala de pesas</li>
+              <li><i class="fas fa-check text-success me-2"></i>Caminadoras</li>
+              <li><i class="fas fa-check text-success me-2"></i>Bicicletas</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Plan por Día -->
+        <div class="col-lg-5 col-md-6">
+          <div class="pricing-card animate-on-scroll text-center p-4 rounded-4 h-100 shadow" style="background: white;">
+            <h4 class="fw-bold mb-3">Plan por Día</h4>
+            <div class="price fs-1 text-secondary mb-3">$2<small class="fs-6 text-muted">/día</small></div>
+            <ul class="list-unstyled fs-5 mb-4">
+              <li><i class="fas fa-check text-success me-2"></i>Acceso a sala de pesas</li>
+              <li><i class="fas fa-check text-success me-2"></i>Caminadoras</li>
+              <li><i class="fas fa-check text-success me-2"></i>Bicicletas</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Galería Section -->
+  <section id="galeria" class="section gallery-section">
+    <div class="container">
+      <div class="text-center mb-4">
+        <i class="fas fa-dumbbell gym-icon fs-1 text-primary"></i>
+      </div>
+      <h2 class="section-title text-center animate-on-scroll mb-5 text-white">Galería de Imágenes</h2>
+      
+      <div class="row g-4">
+        <!-- Imagen 1 -->
+        <div class="col-md-4 col-sm-6">
+          <div class="gallery-item rounded-4 overflow-hidden shadow-sm">
+            <img src="img/Gym 1.png" alt="Equipo" class="img-fluid gallery-img">
+            <div class="gallery-overlay">
+              <div class="text-white">Zona de pesas</div>
+            </div>
+          </div>
+        </div>
+        <!-- Imagen 2 -->
+        <div class="col-md-4 col-sm-6">
+          <div class="gallery-item rounded-4 overflow-hidden shadow-sm">
+            <img src="img/Gym 2.jpg" alt="Equipo" class="img-fluid gallery-img">
+            <div class="gallery-overlay">
+              <div class="text-white">Zona de Pesas</div>
+            </div>
+          </div>
+        </div>
+        <!-- Imagen 3 -->
+        <div class="col-md-4 col-sm-6">
+          <div class="gallery-item rounded-4 overflow-hidden shadow-sm">
+            <img src="img/Gym 3.jpg" alt="Equipo" class="img-fluid gallery-img">
+            <div class="gallery-overlay">
+              <div class="text-white">Zona de pierna</div>
+            </div>
+          </div>
+        </div>
+        <!-- Imagen 4 -->
+        <div class="col-md-4 col-sm-6">
+          <div class="gallery-item rounded-4 overflow-hidden shadow-sm">
+            <img src="img/Gym 4.png" alt="Usuarios Entrenando" class="img-fluid gallery-img">
+            <div class="gallery-overlay">
+              <div class="text-white">Usuarios Entrenando</div>
+            </div>
+          </div>
+        </div>
+        <!-- Imagen 5 -->
+        <div class="col-md-4 col-sm-6">
+          <div class="gallery-item rounded-4 overflow-hidden shadow-sm">
+            <img src="img/Gym 5.jpg" alt="Usuarios Entrenado" class="img-fluid gallery-img">
+            <div class="gallery-overlay">
+              <div class="text-white">Usuarios Entrenando</div>
+            </div>
+          </div>
+        </div>
+        <!-- Imagen 6 -->
+        <div class="col-md-4 col-sm-6">
+          <div class="gallery-item rounded-4 overflow-hidden shadow-sm">
+            <img src="img/Gym 6.jpg" alt="Usuarios Entrenando" class="img-fluid gallery-img">
+            <div class="gallery-overlay">
+              <div class="text-white">Usuarios Entrenando</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonios Section -->
+  <section id="testimonios" class="section testimonials-section">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="section-title animate-on-scroll text-white" style="font-size: 3rem; background: linear-gradient(45deg, #ff6b6b, #4ecdc4); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+          Lo que dicen nuestros miembros
+        </h2>
+        <p class="animate-on-scroll text-white" style="font-size: 1.2rem;">
+          Historias reales de transformación y éxito
+        </p>
+      </div>
+      
+      <div class="row g-4">
+        <!-- Testimonio 1 -->
+        <div class="col-lg-4 col-md-6">
+          <div class="testimonial-card animate-on-scroll">
+            <div class="testimonial-content">
+              <div class="quote-icon text-center mb-3">
+                <i class="fas fa-quote-left text-primary"></i>
+              </div>
+              <p style="text-align: justify;" class="testimonial-text">
+                "Ir a Liceo Gym es una experiencia muy gratificante que me ha enseñado a ser más disciplinada y responsable. Me ha ayudado a mejorar mi salud física y mental, aumentar mi energía y confianza, también a reducir el estrés. Es un espacio donde puedo sentirme orgullosa de mí misma."
+              </p>
+            </div>
+            <div class="author-section d-flex align-items-center">
+              <div class="author-avatar" style="background: linear-gradient(45deg, Navy, #ee5a24);">
+                M
+              </div>
+              <div>
+                <h6 class="author-name text-white">Mariam Yulisa Rivas</h6>
+                <div class="author-info text-white-50">
+                  <i class="fas fa-calendar-alt me-1"></i>
+                  <span>Miembro desde 2025</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonio 2 -->
+        <div class="col-lg-4 col-md-6">
+          <div class="testimonial-card animate-on-scroll">
+            <div class="testimonial-content">
+              <div class="quote-icon text-center mb-3">
+                <i class="fas fa-quote-left text-primary"></i>
+              </div>
+              <p style="text-align: justify;" class="testimonial-text">
+                "Realizar actividad física y formar parte de Liceo Gym me ha servido mucho para mejorar mi salud física y mental, reducir el riesgo de enfermedades crónicas, controlar mi peso y mejorar mi estado de ánimo. El ejercicio regular me ayuda a fortalecer el corazón, los huesos y los músculos."
+              </p>
+            </div>
+            <div class="author-section d-flex align-items-center">
+              <div class="author-avatar" style="background: linear-gradient(45deg, violet, maroon);">
+                J
+              </div>
+              <div>
+                <h6 class="author-name text-white">Jessica Cortéz</h6>
+                <div class="author-info text-white-50">
+                  <i class="fas fa-calendar-alt me-1"></i>
+                  <span>Miembro desde 2025</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonio 3-->
+        <div class="col-lg-4 col-md-6">
+          <div class="testimonial-card animate-on-scroll">
+            <div class="testimonial-content">
+              <div class="quote-icon text-center mb-3">
+                <i class="fas fa-quote-left text-primary"></i>
+              </div>
+              <p style="text-align: justify;" class="testimonial-text">
+                "Asistir al gimnasio se ha convertido en una práctica fundamental para quienes buscamos mejorar nuestra calidad de vida. Más allá de los objetivos físicos o estéticos, ir al gimnasio representa un compromiso con la salud, el bienestar mental y el desarrollo personal."
+              </p>
+            </div>
+            <div class="author-section d-flex align-items-center">
+              <div class="author-avatar" style="background: linear-gradient(45deg, green, red);">
+                I
+              </div>
+              <div>
+                <h6 class="author-name text-white">Idalma Hernández</h6>
+                <div class="author-info text-white-50">
+                  <i class="fas fa-calendar-alt me-1"></i>
+                  <span>Miembro desde 2025</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonio 4 -->
+        <div class="col-lg-4 col-md-6">
+          <div class="testimonial-card animate-on-scroll">
+            <div class="testimonial-content">
+              <div class="quote-icon text-center mb-3">
+                <i class="fas fa-quote-left text-primary"></i>
+              </div>
+              <p style="text-align: justify;" class="testimonial-text">
+                "Normalmente vamos a un gimnasio porque nos queremos ver bien físicamente, y aunque suene avaro, no significa que sea malo, puesto que el ejercicio conlleva un cambio en nuestros hábitos alimenticios, aparte de lo obvio que es una mejora a nivel muscular y fuerza. El vernos bien, implica sentirnos bien con nosotros mismos, y al sentirnos bien, estamos contribuyendo a nuestra salud mental, y a consecuencia, a nuestra salud física también."
+              </p>
+            </div>
+            <div class="author-section d-flex align-items-center">
+              <div class="author-avatar" style="background: linear-gradient(45deg, blue, yellow);">
+                G
+              </div>
+              <div>
+                <h6 class="author-name text-white">Geovany Rivera</h6>
+                <div class="author-info text-white-50">
+                  <i class="fas fa-calendar-alt me-1"></i>
+                  <span>Miembro desde 2025</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonio 5-->
+        <div class="col-lg-4 col-md-6">
+          <div class="testimonial-card animate-on-scroll">
+            <div class="testimonial-content">
+              <div class="quote-icon text-center mb-3">
+                <i class="fas fa-quote-left text-primary"></i>
+              </div>
+              <p style="text-align: justify;" class="testimonial-text">
+                "Ejercitarme en Liceo Gym me ha ayudado a crear un hábito saludable. Es un lugar donde puedo enfocarme en mi bienestar físico y mental, rodeada de un ambiente motivador que me impulsa a dar lo mejor de mí en cada sesión de entrenamiento."
+              </p>
+            </div>
+            <div class="author-section d-flex align-items-center">
+              <div class="author-avatar" style="background: linear-gradient(45deg, purple, pink);">
+                Y
+              </div>
+              <div>
+                <h6 class="author-name text-white">Yohana Laínez</h6>
+                <div class="author-info text-white-50">
+                  <i class="fas fa-calendar-alt me-1"></i>
+                  <span>Miembro desde 2025</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonio 6-->
+        <div class="col-lg-4 col-md-6">
+          <div class="testimonial-card animate-on-scroll">
+            <div class="testimonial-content">
+              <div class="quote-icon text-center mb-3">
+                <i class="fas fa-quote-left text-primary"></i>
+              </div>
+              <p style="text-align: justify;" class="testimonial-text">
+                "Voy al gimnasio no solo para verme bien, sino para mejorar mi salud física y bienestar emocional. Ir al gym me permite aumentar mi fuerza y energía, ya que con cada entrenamiento, mi cuerpo se vuelve más fuerte. El gimnasio me enseña a ser constante y a no rendirme fácilmente."
+              </p>
+            </div>
+            <div class="author-section d-flex align-items-center">
+              <div class="author-avatar" style="background: linear-gradient(45deg, yellow, orange);">
+                A
+              </div>
+              <div>
+                <h6 class="author-name text-white">Aristides Morales</h6>
+                <div class="author-info text-white-50">
+                  <i class="fas fa-calendar-alt me-1"></i>
+                  <span>Miembro desde 2025</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contacto Section -->
+  <section id="contacto" class="section contact-section">
+    <div class="container">
+      <div class="text-center mb-5">
+        <i class="fas fa-phone-volume fs-1 text-primary animate-on-scroll"></i>
+        <h2 class="section-title animate-on-scroll mt-3">Contáctanos</h2>
+        <p class="fs-5 text-muted animate-on-scroll">
+          ¿Tienes preguntas o deseas más información?
+        </p>
+        <p class="fs-5 text-muted animate-on-scroll">
+          ¡Comunicate con Nosotros!
+        </p>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-lg-6">
+          <div class="contact-card p-4 rounded-4 shadow text-center animate-on-scroll bg-white">
+            <h4 class="mb-4 fw-bold text-primary">Liceo Gym</h4>
+            <p class="fs-5 mb-3"><i class="fas fa-map-marker-alt text-primary me-2"></i>Colonia Buenos Aires, Santa Marta, Victoria, Cabañas</p>
+            
+            <p class="fs-5 mb-3">
+              <i class="fab fa-whatsapp text-success me-2"></i>
+              <a href="https://wa.me/50372353194" target="_blank" class="text-dark text-decoration-none">
+                +503 7540-4182
+              </a>
+            </p>
+
+            <p class="fs-5 mb-3">
+              <i class="fab fa-facebook text-primary me-2"></i>
+              <a href="https://www.facebook.com/share/19HRRupdrg/?mibextid=wwXIfr" target="_blank" class="text-dark text-decoration-none">
+                Liceo Gym
+              </a>
+            </p>
+
+            <p class="mt-4 mb-0 text-muted">¡El primer paso hacia el cambio lo das tú!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container text-center">
+      <p class="mb-0">© 2025 Liceo Gym.<br><strong>Apoyemos lo Nuestro</strong></p>
+      <div class="social-links mt-3">
+        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+      </div>
+    </div>
+  </footer>
+
+
+
+  <!-- Botón para volver al inicio -->
+<a href="#inicio" class="back-to-top" id="backToTop">
+  <i class="fas fa-arrow-up"></i>
+</a>
+
+  <!-- Scripts de Bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Animación on-scroll -->
+  <script>
+    const elements = document.querySelectorAll('.animate-on-scroll');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animated');
+          observer.unobserve(entry.target);
+        }
+      });
+    });
+
+    elements.forEach(el => observer.observe(el));
+  </script>
+
+  <!-- Efectos de hover para galería -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const galleryItems = document.querySelectorAll('.gallery-item');
+      
+      galleryItems.forEach(item => {
+        item.addEventListener('mouseenter', function() {
+          this.querySelector('.gallery-img').style.transform = 'scale(1.1)';
+          this.querySelector('.gallery-overlay').style.opacity = '1';
+        });
+        
+        item.addEventListener('mouseleave', function() {
+          this.querySelector('.gallery-img').style.transform = 'scale(1)';
+          this.querySelector('.gallery-overlay').style.opacity = '0';
+        });
+      });
+    });
+  </script>
+</body>
+</html>

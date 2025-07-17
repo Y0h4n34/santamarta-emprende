@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Leivas - Decoraciones y Eventos</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #fffaf5 0%, #f8f0e8 100%);
+      color: #333;
+      line-height: 1.6;
+      overflow-x: hidden;
+      padding-top: 70px; /* Espacio para el menú móvil */
+    }
+
+    /* Header mejorado con efecto parallax */
+    header {
+      background: linear-gradient(135deg, #d97b70 0%, #e6a396 50%, #f2b8af 100%);
+      color: white;
+      text-align: center;
+      padding: 4rem 1rem;
+      position: relative;
+      overflow: hidden;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-attachment: fixed;
+      background-size: cover;
+      margin-top: -70px; /* Compensa el padding del body */
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><circle fill="rgba(255,255,255,0.1)" cx="200" cy="100" r="80"/><circle fill="rgba(255,255,255,0.05)" cx="800" cy="200" r="120"/><circle fill="rgba(255,255,255,0.1)" cx="1000" cy="300" r="60"/><circle fill="rgba(255,255,255,0.05)" cx="400" cy="400" r="90"/></svg>');
+      animation: float 20s ease-in-out infinite;
+      z-index: 1;
+    }
+
+    .header-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+      transition: all 0.5s ease;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .header-content:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+    }
+
+    .logo-link {
+      display: inline-block;
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .logo-link:hover {
+      transform: rotate(5deg) scale(1.1);
+    }
+
+    .logo-circle {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid rgba(255,255,255,0.8);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      transition: all 0.5s ease;
+    }
+
+    .logo-link:hover .logo-circle {
+      border-color: #fff;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    }
+
+    .header-text h1 {
+      font-size: 3.5rem;
+      margin: 1.5rem 0;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+      background: linear-gradient(45deg, #fff, #f8e0d9);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    .header-text p {
+      font-size: 1.5rem;
+      opacity: 0.95;
+      margin-bottom: 1rem;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+    }
+
+    /* Botón CTA */
+    .cta-button {
+      display: inline-block;
+      background: white;
+      color: #d97b70;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      margin-top: 1.5rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+      transition: 0.5s;
+    }
+
+    .cta-button:hover::before {
+      left: 100%;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+      background: #fff;
+      color: #d97b70;
+    }
+
+    /* Navegación mejorada con efecto glassmorphism - Versión móvil primero */
+    nav {
+      background: rgba(240, 229, 224, 0.95);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      padding: 1.5rem;
+      flex-wrap: wrap;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 20px rgba(217, 123, 112, 0.2);
+      border-bottom: 1px solid rgba(255,255,255,0.3);
+      transform: translateY(0);
+      transition: transform 0.3s ease;
+    }
+
+    nav.hidden {
+      transform: translateY(-100%);
+    }
+
+    .menu-toggle {
+      display: none;
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      background: #d97b70;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      font-size: 1.5rem;
+      z-index: 1001;
+      cursor: pointer;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+    }
+
+    .menu-toggle:hover {
+      background: #e6a396;
+      transform: scale(1.1);
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #d97b70;
+      font-weight: 600;
+      padding: 0.8rem 1.5rem;
+      border-radius: 50px;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+      font-size: 1.1rem;
+      letter-spacing: 0.5px;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 3px;
+      background: #d97b70;
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover::after {
+      width: 70%;
+    }
+
+    nav a:hover {
+      color: #d97b70;
+      transform: translateY(-3px);
+    }
+
+    nav a.active {
+      background: #d97b70;
+      color: white;
+      box-shadow: 0 5px 15px rgba(217, 123, 112, 0.3);
+    }
+
+    /* Secciones mejoradas con efecto de aparición */
+    section {
+      padding: 6rem 2rem;
+      max-width: 1200px;
+      margin: auto;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    section.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    section:nth-child(even) {
+      background: rgba(255, 255, 255, 0.5);
+      margin: 3rem auto;
+      border-radius: 20px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+      border: 1px solid rgba(255,255,255,0.5);
+      backdrop-filter: blur(5px);
+    }
+
+    section h2 {
+      color: #d97b70;
+      font-size: 2.8rem;
+      text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+      padding-bottom: 1.5rem;
+      font-weight: 700;
+    }
+
+    section h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 5px;
+      background: linear-gradient(90deg, #d97b70, #e6a396);
+      border-radius: 3px;
+    }
+
+    section p {
+      text-align: justify;
+      margin-bottom: 1.8rem;
+      font-size: 1.15rem;
+      line-height: 1.8;
+      transition: all 0.3s ease;
+    }
+
+    section p:hover {
+      transform: translateX(5px);
+    }
+
+    /* Lista de productos mejorada con iconos animados */
+    #productos ul {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    #productos li {
+      background: white;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(217, 123, 112, 0.1);
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+      border-left: 5px solid #d97b70;
+      font-size: 1.1rem;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    #productos li::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, #d97b70, #e6a396);
+      opacity: 0;
+      z-index: -1;
+      transition: opacity 0.4s ease;
+    }
+
+    #productos li:hover {
+      transform: translateY(-10px) scale(1.03);
+      box-shadow: 0 20px 50px rgba(217, 123, 112, 0.3);
+      color: white;
+    }
+
+    #productos li:hover::before {
+      opacity: 1;
+    }
+
+    #productos li i {
+      margin-right: 10px;
+      font-size: 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    #productos li:hover i {
+      transform: rotate(15deg) scale(1.2);
+      color: white;
+    }
+
+    /* Galería mejorada con efecto de zoom y tilt */
+    .galeria {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+      margin-top: 3rem;
+    }
+
+    .galeria-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 15px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+      transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+      transform-style: preserve-3d;
+      perspective: 1000px;
+      height: 300px;
+    }
+
+    .galeria img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: all 0.5s ease;
+    }
+
+    .galeria-item:hover {
+      transform: translateY(-15px) rotateX(5deg) rotateY(5deg);
+      box-shadow: 0 30px 60px rgba(217, 123, 112, 0.4);
+    }
+
+    .galeria-item:hover img {
+      transform: scale(1.1) rotate(1deg);
+    }
+
+    .galeria-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, rgba(217, 123, 112, 0.9), rgba(230, 163, 150, 0.9));
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 1.5rem;
+      text-align: center;
+      padding: 2rem;
+      transform: translateY(20px);
+      transition: all 0.5s ease;
+    }
+
+    .galeria-item:hover .galeria-overlay {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .galeria-overlay::after {
+      content: 'Ver más';
+      font-size: 1rem;
+      margin-top: 1rem;
+      background: white;
+      color: #d97b70;
+      padding: 0.5rem 1.5rem;
+      border-radius: 50px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s ease 0.2s;
+    }
+
+    .galeria-item:hover .galeria-overlay::after {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Sección de contacto mejorada */
+    #contacto {
+      background: linear-gradient(135deg, #d97b70, #e6a396);
+      color: white;
+      border-radius: 20px;
+      margin: 3rem auto;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #contacto::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="rgba(255,255,255,0.05)" d="M0,0 L100,0 L100,100 L0,100 Z" /></svg>');
+      animation: rotate 30s linear infinite;
+      z-index: 0;
+    }
+
+    #contacto h2 {
+      color: white;
+      position: relative;
+      z-index: 1;
+    }
+
+    #contacto h2::after {
+      background: white;
+    }
+
+    #contacto p {
+      position: relative;
+      z-index: 1;
+    }
+
+    #contacto strong {
+      color: #fff3f0;
+      font-weight: 600;
+    }
+
+    #contacto a {
+      color: white;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      position: relative;
+      font-weight: 600;
+    }
+
+    #contacto a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: white;
+      transition: width 0.3s ease;
+    }
+
+    #contacto a:hover::after {
+      width: 100%;
+    }
+
+    #contacto a:hover {
+      text-shadow: 0 0 10px rgba(255,255,255,0.5);
+    }
+
+    .contact-info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+      margin-top: 3rem;
+    }
+
+    .contact-card {
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(10px);
+      padding: 2rem;
+      border-radius: 15px;
+      text-align: center;
+      min-width: 250px;
+      transition: all 0.4s ease;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .contact-card:hover {
+      transform: translateY(-10px);
+      background: rgba(255,255,255,0.25);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    }
+
+    .contact-card i {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: white;
+    }
+
+    /* Footer mejorado con olas SVG */
+    footer {
+      background: linear-gradient(135deg, #333 0%, #555 100%);
+      color: white;
+      text-align: center;
+      padding: 4rem 2rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    footer::before {
+      content: '';
+      position: absolute;
+      top: -50px;
+      left: 0;
+      right: 0;
+      height: 100px;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" fill="%23d97b70"/><path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" fill="%23d97b70"/><path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="%23d97b70"/></svg>');
+      background-size: cover;
+    }
+
+    footer p {
+      position: relative;
+      z-index: 1;
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .social-links a {
+      color: white;
+      font-size: 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .social-links a:hover {
+      transform: translateY(-5px) scale(1.2);
+      color: #f2b8af;
+    }
+
+    /* Animaciones */
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes scaleIn {
+      from {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes fadeInScale {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      25% { transform: translateY(-10px) rotate(1deg); }
+      50% { transform: translateY(-5px) rotate(-1deg); }
+      75% { transform: translateY(-15px) rotate(0.5deg); }
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    /* Elementos decorativos */
+    .decorative-element {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: #d97b70;
+      border-radius: 50%;
+      opacity: 0.1;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .decorative-element:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+    .decorative-element:nth-child(2) { top: 60%; right: 15%; animation-delay: 2s; }
+    .decorative-element:nth-child(3) { bottom: 30%; left: 20%; animation-delay: 4s; }
+
+    /* Scroll animations */
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    .animate-on-scroll.animated {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Botón de scroll to top */
+    .scroll-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #d97b70;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      font-size: 1.8rem;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+      opacity: 0;
+      transform: translateY(100px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 5px 20px rgba(217, 123, 112, 0.4);
+    }
+
+    .scroll-to-top.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .scroll-to-top:hover {
+      background: #e6a396;
+      transform: translateY(-5px) scale(1.1);
+      box-shadow: 0 10px 30px rgba(217, 123, 112, 0.6);
+    }
+
+    /* Efecto de confeti */
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background-color: #f00;
+      opacity: 0;
+      z-index: 9999;
+      animation: confetti-fall 5s linear forwards;
+    }
+
+    @keyframes confetti-fall {
+      0% {
+        transform: translateY(-100vh) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .header-content {
+        padding: 1.5rem;
+      }
+      
+      .header-text h1 {
+        font-size: 2.8rem;
+      }
+      
+      .header-text p {
+        font-size: 1.2rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding-top: 60px; /* Ajuste para menú móvil */
+      }
+      
+      header {
+        min-height: auto;
+        padding: 2rem 1rem;
+        margin-top: -60px; /* Compensa el padding del body */
+      }
+      
+      .header-content {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .logo-circle {
+        width: 120px;
+        height: 120px;
+        margin-bottom: 1.5rem;
+      }
+      
+      .header-text h1 {
+        font-size: 2.2rem;
+      }
+      
+      /* Menú móvil */
+      nav {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.8rem;
+        padding: 1rem;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease, padding 0.3s ease;
+      }
+      
+      nav.active {
+        max-height: 500px;
+        padding: 1.5rem;
+      }
+      
+      nav a {
+        width: 100%;
+        text-align: center;
+        padding: 0.8rem;
+      }
+      
+      .menu-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      section {
+        padding: 4rem 1.5rem;
+      }
+      
+      section h2 {
+        font-size: 2.2rem;
+      }
+      
+      #productos ul {
+        grid-template-columns: 1fr;
+      }
+      
+      .galeria {
+        grid-template-columns: 1fr;
+      }
+      
+      .contact-info {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .contact-card {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding-top: 50px; /* Ajuste para menú móvil */
+      }
+      
+      header {
+        margin-top: -50px; /* Compensa el padding del body */
+      }
+      
+      .header-text h1 {
+        font-size: 1.8rem;
+      }
+      
+      section h2 {
+        font-size: 1.8rem;
+      }
+      
+      .scroll-to-top {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+      }
+      
+      .menu-toggle {
+        width: 45px;
+        height: 45px;
+        font-size: 1.3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Elementos decorativos -->
+  <div class="decorative-element"></div>
+  <div class="decorative-element"></div>
+  <div class="decorative-element"></div>
+
+  <!-- Botón de menú móvil -->
+  <button class="menu-toggle" id="menuToggle" aria-label="Menú">
+    <i class="fas fa-bars"></i>
+  </button>
+
+  <!-- Navegación sticky -->
+  <nav id="mainNav">
+    <a href="#historia" class="nav-link">Historia</a>
+    <a href="#motivacion" class="nav-link">Motivación</a>
+    <a href="#productos" class="nav-link">Productos</a>
+    <a href="#beneficios" class="nav-link">Beneficios</a>
+    <a href="#galeria" class="nav-link">Galería</a>
+    <a href="#contacto" class="nav-link">Contacto</a>
+  </nav>
+
+  <!-- Header con efecto parallax -->
+  <header>
+    <div class="header-content animate__animated animate__fadeIn">
+      <a href="index.html" class="logo-link" aria-label="Ir a página principal">
+        <img src="img/Decoraciones.jpg" alt="Logo Leivas Decoraciones" class="logo-circle">
+      </a>
+      
+      <div class="header-text">
+        <h1 class="animate__animated animate__fadeInDown">Leivas Decoraciones y Eventos</h1>
+        <p class="animate__animated animate__fadeInUp animate__delay-1s">Nos encargamos de decorar tus eventos con mucho amor y creatividad</p>
+        <a href="#contacto" class="cta-button animate__animated animate__fadeInUp animate__delay-2s">Contáctanos</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Secciones con animación al aparecer -->
+  <section id="historia" class="animate-on-scroll">
+    <h2>Historia de Nuestro Emprendimiento</h2>
+    <p>Leivas decoraciones y eventos es un emprendimiento que tiene sus inicios hace 7 años aproximadamente, esta fue una idea de dos jóvenes de la comunidad Santa Marta, ellas son Yoselin de los Ángeles Ayala y Oneyda Marisol Leiva, ellas dos conforman el equipo que labora en este emprendimiento. La idea de este negocio surge con el fin de obtener fondos extra como familia.</p>
+    <p>Yoselin y Oneyda montan este emprendimiento luego de descubrir sus capacidades y creatividad en cuanto a la realización de decoraciones, mencionan que ellas comienzan realizando decoraciones en eventos familiares, de esta manera es como ellas van obteniendo mayor experiencia en cuanto a este trabajo, y luego de cada evento ellas publicaban fotografías en sus redes sociales de los resultado obtenidos y cuando las personas comienzan a ver sus hermosos resultados, les motivan a que sigan adelante y a la vez les van solicitando sus servicios de decoraciones. Ante esta respuesta favorable de la población ellas comprenden que pueden llevar a la práctica estos conocimientos creando su propio emprendimiento.</p>
+    <p>Yoselin y Oneyda han logrado mejorar sus resultados en cuanto a las decoraciones informándose en internet y por la parte de repostería ellas han recibido preparación durante un año, toda esta dedicación y esfuerzo que ellas han puesto es lo que les ha permitido ser una opción ideal para todas aquellas personas que necesitan servicios de decoración y repostería en cualquier tipo de festejos familiares.</p>
+  </section>
+
+  <section id="motivacion" class="animate-on-scroll">
+    <h2>Qué nos impulsa a seguir con nuestro emprendimiento</h2>
+    <p>Lo que motiva a Yoselin y a Oneyda a seguir realizando sus servicios de repostería, arreglos florales y decoración de eventos, son esas palabras de aliento que les brindan las personas luego de ver sus hermosos resultados después de cada trabajo.</p>
+    <p>Reconocen que los servicios que ellas ofrecen son brindados por otros grupos de personas de la comunidad, pero a su vez mencionan que esto no se trata de una competencia, sino de apoyarse cuando sea necesario para poder ofrecer mejores servicios a los clientes.</p>
+    <p>Entre los desafíos que ellas enfrentan como equipo se destacan los comentarios negativos recibidos por parte de las personas a la hora de realizar sus trabajos, las condiciones climáticas u otras circunstancias que están fuera de su control, pero que de una u otra manera pueden venir a perjudicar su trabajo. Ante todo esto Yoselin y Oneyda se mantienen con una actitud optimista y con muchas intenciones de realizar cada trabajo de la mejor manera posible para brindar una satisfacción total a sus clientes.</p>
+    <p style="text-align: center; font-weight: bold; color: #d97b70; font-size: 1.2rem; animation: pulse 2s infinite;">Los consejos que ellas brindan a aquellas personas que desean montar sus emprendimientos son los siguientes:</p>
+    <p><i class="fas fa-arrow-right" style="color: #d97b70;"></i> Que dejen a un lado el miedo y que se atrevan a dar el primer paso.</p>
+    <p><i class="fas fa-arrow-right" style="color: #d97b70;"></i> Que confíen en el trabajo que van a realizar y en la capacidad que tienen de desarrollarlo.</p>
+    <p><i class="fas fa-arrow-right" style="color: #d97b70;"></i> Crear lazos de compañerismo con otras personas que ya hayan montado sus emprendimientos.</p>
+    <p><i class="fas fa-arrow-right" style="color: #d97b70;"></i> Capacitar y recibir cursos que les ayuden a adquirir una mayor preparación en el área que desean desempeñar su emprendimiento.</p>
+    <p><i class="fas fa-arrow-right" style="color: #d97b70;"></i> Que a pesar de las dificultades que puedan enfrentar en un inicio, no se desanimen, sino que sigan adelante con muchas ganas de hacer las cosas de la mejor manera posible.</p>
+  </section>
+
+  <section id="productos" class="animate-on-scroll">
+    <h2>Productos y Servicios que le ofrecemos</h2>
+    <ul>
+      <li><i class="fas fa-birthday-cake"></i> Decoraciones personalizadas para todo tipo de eventos</li>
+      <li><i class="fas fa-spa"></i> Arreglos florales artificiales y naturales para cualquier ocasión</li>
+      <li><i class="fas fa-cake"></i> Pasteles con temática personalizada según lo solicite el cliente</li>
+      <li><i class="fas fa-chair"></i> Alquiler de mesas y sillas para todo tipo de eventos</li>
+      <li><i class="fas fa-wine-glass-alt"></i> Centros de mesa para sus eventos</li>
+    </ul>
+  </section>
+
+  <section id="beneficios" class="animate-on-scroll">
+    <h2>Beneficios para nuestros clientes</h2>
+    <p>Uno de los mayores beneficios que en Leivas Decoraciones y Eventos se ofrece es la responsabilidad que las encargadas del emprendimiento ponen en cada evento que realizan para que este salga de la mejor manera posible, la accesibilidad en sus productos y servicios, tanto en términos de cercanía como económicos.</p>
+    <p>Las compañeras encargadas de darle vida a este emprendimiento disfrutan cada decoración y cada servicio que brindan en los diferentes eventos, describen este trabajo como algo "Bonito y Satisfactorio", pues luego de cada resultado se sienten muy satisfechas luego de ver la alegría en cada uno de sus clientes.</p>
+    <p>Leivas Decoraciones y Eventos es una opción ideal para todo tipo de servicios que necesites sobre cualquier tipo de festejos personales y familiares.</p>
+  </section>
+
+  <section id="galeria" class="animate-on-scroll">
+    <h2>Galería de Decoraciones</h2>
+    <div class="galeria">
+      <div class="galeria-item">
+        <img src="img/Decoraciones 1.jpeg" alt="Decoración de evento elegante">
+        <div class="galeria-overlay">Fiesta Rosa</div>
+      </div>
+      <div class="galeria-item">
+        <img src="img/Decoraciones 2.jpg" alt="Mesa de cumpleaños decorada">
+        <div class="galeria-overlay">Decoración Personalizada</div>
+      </div>
+      <div class="galeria-item">
+        <img src="img/Decoraciones 3.jpg" alt="Decoración con flores">
+        <div class="galeria-overlay">Decoración Personalizada</div>
+      </div>
+      <div class="galeria-item">
+        <img src="img/Decoraciones 4.jpg" alt="Pastel decorado">
+        <div class="galeria-overlay">Decoración Personalizada</div>
+      </div>
+      <div class="galeria-item">
+        <img src="img/Decoraciones 10.jpg" alt="Evento con decoración temática">
+        <div class="galeria-overlay">Repostería Personalizada</div>
+      </div>
+      <div class="galeria-item">
+        <img src="img/Decoraciones 5.jpg" alt="Centro de mesa decorativo">
+        <div class="galeria-overlay">Decoración Personalizada</div>
+      </div>
+      <div class="galeria-item">
+        <img src="img/Decoraciones 6.jpg" alt="Decoración de boda">
+        <div class="galeria-overlay">Repostería Personalizada</div>
+      </div>
+      <div class="galeria-item">
+        <img src="img/Decoraciones 7.jpg" alt="Fiesta infantil decorada">
+        <div class="galeria-overlay">Repostería Personalizada</div>
+      </div>
+      <div class="galeria-item">
+        <img src="img/Decoraciones 8.jpg" alt="Decoración con globos">
+        <div class="galeria-overlay">Repostería Personalizada</div>
+      </div>
+      <div class="galeria-item">
+        <img src="img/Decoraciones 9.jpg" alt="Fiesta infantil decorada">
+        <div class="galeria-overlay">Repostería Personalizada</div>
+      </div>
+      <div class="galeria-item">
+        <img src="img/Decoraciones 11.jpg" alt="Fiesta infantil decorada">
+        <div class="galeria-overlay">Arreglo Floral</div>
+      </div>
+      <div class="galeria-item">
+        <img src="img/Decoraciones 12.jpg" alt="Fiesta infantil decorada">
+        <div class="galeria-overlay">Arreglo Floral</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto" class="animate-on-scroll">
+    <h2>¿Cómo solicitar nuestros servicios?</h2>
+    <p>Para poder adquirir los servicios que ofrecen Yoselin y Oneyda en Leivas Decoraciones y Eventos, es necesario que se comuniquen con ellas, dependiendo del tipo de servicios que soliciten, un mes antes del evento (si es un evento que requerirá de mucha preparación previa) o 2 semanas antes (si el evento no demandará demasiada organización previo al mismo). Pueden contactarlas a través del número de WhatsApp y sus perfiles personales de Facebook que se brindarán a continuación.</p>
+    
+    <div class="contact-info">
+      <div class="contact-card">
+        <i class="fab fa-whatsapp"></i>
+        <p><strong>WhatsApp:</strong> +503 72353493</p>
+      </div>
+      <div class="contact-card">
+        <i class="fab fa-facebook"></i>
+        <p><strong>Facebook:</strong> <a href="https://www.facebook.com/share/1Zh5JosWEY/?mibextid=wwXIfr" target="_blank">Oneyda Marisol Leiva</a></p>
+      </div>
+      <div class="contact-card">
+        <i class="fab fa-facebook"></i>
+        <p><strong>Facebook:</strong> <a href="https://www.facebook.com/share/14F2NF1rk4h/?mibextid=wwXIfr" target="_blank">Yosselynne Ayala</a></p>
+      </div>
+      <div class="contact-card">
+        <i class="fas fa-map-marker-alt"></i>
+        <p><strong>Dirección:</strong> Comunidad Santa Marta, Municipio de Victoria, Departamento de Cabañas Este</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Leivas Decoraciones y Eventos - Creando momentos inolvidables</p>
+    <p><strong>Apoyemos lo Nuestro</strong></p>
+  </footer>
+
+  <!-- Botón scroll to top -->
+  <button class="scroll-to-top" onclick="scrollToTop()" aria-label="Volver arriba"><i class="fas fa-arrow-up"></i></button>
+
+  <script>
+    // Menú móvil
+    const menuToggle = document.getElementById('menuToggle');
+    const mainNav = document.getElementById('mainNav');
+    
+    menuToggle.addEventListener('click', function() {
+      mainNav.classList.toggle('active');
+      const icon = this.querySelector('i');
+      if (mainNav.classList.contains('active')) {
+        icon.classList.remove('fa-bars');
+        icon.classList.add('fa-times');
+      } else {
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+      }
+    });
+    
+    // Cerrar menú al hacer clic en un enlace (solo en móvil)
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', function() {
+        if (window.innerWidth <= 768) {
+          mainNav.classList.remove('active');
+          menuToggle.querySelector('i').classList.remove('fa-times');
+          menuToggle.querySelector('i').classList.add('fa-bars');
+        }
+      });
+    });
+
+    // Smooth scrolling para los enlaces de navegación
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+          
+          // Actualizar clase activa en navegación
+          document.querySelectorAll('nav a').forEach(link => {
+            link.classList.remove('active');
+          });
+          this.classList.add('active');
+        }
+      });
+    });
+
+    // Animaciones al hacer scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animated');
+          
+          // Efecto de confeti al llegar a ciertas secciones
+          if(entry.target.id === 'contacto') {
+            createConfetti();
+          }
+        }
+      });
+    }, observerOptions);
+
+    // Observar todas las secciones
+    document.querySelectorAll('.animate-on-scroll').forEach(section => {
+      observer.observe(section);
+    });
+
+    // Animación escalonada para elementos de la galería
+    const galeriaItems = document.querySelectorAll('.galeria-item');
+    galeriaItems.forEach((item, index) => {
+      item.style.animationDelay = `${index * 0.1}s`;
+    });
+
+    // Animación escalonada para productos
+    const productItems = document.querySelectorAll('#productos li');
+    productItems.forEach((item, index) => {
+      item.style.animationDelay = `${index * 0.15}s`;
+    });
+
+    // Botón scroll to top
+    const scrollToTopBtn = document.querySelector('.scroll-to-top');
+
+    window.addEventListener('scroll', function() {
+      if (window.pageYOffset > 300) {
+        scrollToTopBtn.classList.add('show');
+      } else {
+        scrollToTopBtn.classList.remove('show');
+      }
+      
+      // Actualizar navegación activa al hacer scroll
+      updateActiveNav();
+      
+      // Ocultar/mostrar menú en móvil al hacer scroll
+      if (window.innerWidth <= 768) {
+        const currentScrollPos = window.pageYOffset;
+        if (Math.abs(this.lastScrollPos - currentScrollPos) > 50) {
+          if (currentScrollPos > this.lastScrollPos && currentScrollPos > 100) {
+            // Scroll hacia abajo
+            mainNav.classList.remove('active');
+            menuToggle.querySelector('i').classList.remove('fa-times');
+            menuToggle.querySelector('i').classList.add('fa-bars');
+          } else {
+            // Scroll hacia arriba
+          }
+          this.lastScrollPos = currentScrollPos;
+        }
+      }
+    });
+
+    // Inicializar lastScrollPos
+    window.lastScrollPos = 0;
+
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+
+    // Efecto parallax en el header
+    window.addEventListener('scroll', function() {
+      const scrolled = window.pageYOffset;
+      const header = document.querySelector('header');
+      if (header) {
+        header.style.backgroundPositionY = `${-scrolled * 0.5}px`;
+      }
+    });
+
+    // Actualizar navegación activa según scroll
+    function updateActiveNav() {
+      const sections = document.querySelectorAll('section');
+      let currentSection = '';
+      
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
+          currentSection = section.getAttribute('id');
+        }
+      });
+      
+      document.querySelectorAll('nav a').forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${currentSection}`) {
+          link.classList.add('active');
+        }
+      });
+    }
+
+    // Efecto de confeti
+    function createConfetti() {
+      const colors = ['#d97b70', '#e6a396', '#f2b8af', '#fff', '#ffd700'];
+      
+      for (let i = 0; i < 100; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.left = `${Math.random() * 100}vw`;
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.width = `${Math.random() * 10 + 5}px`;
+        confetti.style.height = `${Math.random() * 10 + 5}px`;
+        confetti.style.animationDuration = `${Math.random() * 3 + 2}s`;
+        document.body.appendChild(confetti);
+        
+        // Eliminar confeti después de la animación
+        setTimeout(() => {
+          confetti.remove();
+        }, 5000);
+      }
+    }
+
+    // Efecto hover para las tarjetas de contacto
+    const contactCards = document.querySelectorAll('.contact-card');
+    contactCards.forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        const icon = card.querySelector('i');
+        icon.style.transform = 'rotate(15deg) scale(1.2)';
+      });
+      
+      card.addEventListener('mouseleave', () => {
+        const icon = card.querySelector('i');
+        icon.style.transform = 'rotate(0) scale(1)';
+      });
+    });
+
+    // Cargar animaciones al inicio
+    document.addEventListener('DOMContentLoaded', function() {
+      // Animación de escritura para el título principal
+      const title = document.querySelector('.header-text h1');
+      if (title) {
+        const titleText = title.textContent;
+        title.textContent = '';
+        
+        let i = 0;
+        const typeWriter = () => {
+          if (i < titleText.length) {
+            title.textContent += titleText.charAt(i);
+            i++;
+            setTimeout(typeWriter, 100);
+          }
+        };
+        
+        setTimeout(typeWriter, 500);
+      }
+      
+      // Activar primera sección al cargar
+      updateActiveNav();
+    });
+
+    // Efecto de tilt en elementos de la galería
+    galeriaItems.forEach(item => {
+      item.addEventListener('mousemove', (e) => {
+        const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+        const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+        item.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+      });
+      
+      item.addEventListener('mouseleave', () => {
+        item.style.transform = 'rotateY(0) rotateX(0)';
+      });
+    });
+  </script>
+</body>
+</html>
